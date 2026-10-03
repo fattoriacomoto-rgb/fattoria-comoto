@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Fattoria CoMoTo</title>
+<meta name="description" content="会津坂下町のSoba cafe & Farmer's restaurant「ファットリアこもと」。自家栽培と地元素材のイタリアンと高寺芯そば。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;1,200;1,300;1,400&family=M+PLUS+2:wght@400;500;700&display=swap">
+<style>
+/* Layout: メニュー表紙（細いイタリック体のロゴ、トマト・バジル）を引き継ぐ。料理写真のモザイクを主役に、価格入りのキャプション */
+:root{
+  --bg:#ffffff; --tint:#f3f6f1; --fg:#1f2421; --muted:#636b66; --line:#e2e7e2;
+  --tomato:#c8372a; --basil:#2f6d36; --yolk:#e9b632;
+  --f-logo:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --f-body:"M PLUS 2","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141715; --tint:#1c211e; --fg:#eef1ee; --muted:#a3aca6; --line:#2d3430;
+  --tomato:#ef6b5c; --basil:#7fc488; --yolk:#f0c859; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141715; --tint:#1c211e; --fg:#eef1ee; --muted:#a3aca6; --line:#2d3430;
+  --tomato:#ef6b5c; --basil:#7fc488; --yolk:#f0c859; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.85;margin:0}
+a{color:var(--tomato)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--tomato);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px}
+h2,h3{text-wrap:balance;margin:0;line-height:1.4}
+.it{font-family:var(--f-logo);font-style:italic;font-weight:300}
+.kicker{font-family:var(--f-logo);font-style:italic;font-weight:400;color:var(--tomato);letter-spacing:.04em;font-size:1rem}
+
+header{padding-block:16px}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+header .logo{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size:1.5rem;text-decoration:none;color:var(--fg)}
+header nav{display:flex;gap:18px;flex-wrap:wrap;font-size:.88rem}
+header nav a{color:var(--fg);text-decoration:none}
+header nav a:hover{color:var(--tomato)}
+
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);align-items:center;padding-block:clamp(24px,5vw,56px) clamp(48px,7vw,80px)}
+.hero h1{font-family:var(--f-logo);font-style:italic;font-weight:200;font-size:clamp(3rem,9vw,6.4rem);line-height:.95;margin:0;letter-spacing:-.01em}
+.hero .sub{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size:clamp(1.05rem,2vw,1.35rem);color:var(--basil);margin:.6em 0 1.2em}
+.hero .lead{font-size:1.02rem;max-width:26em;margin:0}
+.hero .lead strong{color:var(--tomato);font-weight:700}
+.mosaic{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:8px;aspect-ratio:3/2}
+.mosaic img{width:100%;height:100%;object-fit:cover;display:block;border-radius:2px}
+.mosaic img:first-child{grid-column:span 2;grid-row:span 2}
+
+.ribbon{background:var(--tint);border-block:1px solid var(--line)}
+.ribbon .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding-block:24px}
+.ribbon b{display:block;font-family:var(--f-logo);font-weight:600;font-size:1.35rem;color:var(--basil);font-variant-numeric:tabular-nums}
+.ribbon span{font-size:.85rem;color:var(--muted)}
+
+section{padding-block:clamp(56px,8vw,96px)}
+.head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+.head h2{font-size:clamp(1.5rem,3vw,2rem);font-weight:700}
+
+.news{padding-bottom:0}
+.sample{font-size:.78rem;color:var(--muted);margin:0}
+.news-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(20px,4vw,48px);align-items:start}
+.feature{display:block;text-decoration:none;color:var(--fg);background:var(--tint);border-radius:2px;overflow:hidden}
+.feature img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.feature-body{padding:18px 20px 20px}
+.feature h3{font-size:1.15rem;margin:.5em 0 .3em}
+.feature p{margin:0 0 .6em;font-size:.92rem}
+.feature-meta{font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.feature:hover h3{color:var(--tomato)}
+.news-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.news-list li{display:grid;grid-template-columns:6.2em 6.5em minmax(0,1fr);gap:10px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line);font-size:.95rem}
+.news-list time{font-family:var(--f-logo);font-weight:500;font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.news-list a{color:var(--fg);text-decoration:none}
+.news-list a:hover{color:var(--tomato);text-decoration:underline}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:2px;text-align:center;line-height:1.6;white-space:nowrap;justify-self:start}
+.tag-new{background:var(--basil);color:var(--bg)}
+.tag-limited{background:var(--tomato);color:var(--bg)}
+.tag-info{border:1px solid var(--line);color:var(--muted)}
+.teaser{padding-top:0}
+.btn-menu{padding:10px 22px;border-radius:999px;background:var(--fg);color:var(--bg);text-decoration:none;font-size:.9rem}
+.teaser-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.teaser-grid a{text-decoration:none;color:var(--fg)}
+.teaser-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:2px}
+.teaser-grid span{display:flex;justify-content:space-between;gap:8px;margin-top:6px;font-weight:500}
+.teaser-grid small{color:var(--muted);font-weight:400;font-variant-numeric:tabular-nums}
+.intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,5vw,64px);align-items:center}
+.intro p{margin:0 0 1em;max-width:34em}
+.intro figure{margin:0}
+.intro figure img{width:100%;display:block;border-radius:2px}
+.intro figcaption{font-size:.8rem;color:var(--muted);margin-top:6px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:44px}
+.facts div{border-left:3px solid var(--basil);padding:4px 0 4px 16px}
+.facts div:nth-child(2){border-left-color:var(--tomato)}
+.facts div:nth-child(3){border-left-color:var(--yolk)}
+.facts b{display:block;font-family:var(--f-logo);font-weight:600;font-size:1.5rem;color:var(--fg);font-variant-numeric:tabular-nums;line-height:1.3}
+.facts span{font-size:.85rem;color:var(--muted)}
+
+.story{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,5vw,64px);align-items:start}
+.story img{width:100%;display:block}
+.story h2{font-size:clamp(1.4rem,2.8vw,1.9rem);margin:.2em 0 .8em}
+.story p{margin:0 0 1em;max-width:34em}
+.points{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:44px}
+.points article{background:var(--tint);padding:20px;border-top:3px solid var(--basil)}
+.points article:nth-child(2){border-top-color:var(--tomato)}
+.points article:nth-child(3){border-top-color:var(--yolk)}
+.points article:nth-child(4){border-top-color:var(--basil)}
+.points article:nth-child(5){border-top-color:var(--tomato)}
+.points article:nth-child(6){border-top-color:var(--yolk)}
+.points h3{font-size:1rem;margin-bottom:6px;word-break:keep-all;overflow-wrap:anywhere}
+.points p{margin:0;font-size:.9rem}
+
+.visit{background:var(--tint);border-top:1px solid var(--line)}
+.visit .grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,5vw,56px)}
+.rows{display:grid;grid-template-columns:7em minmax(0,1fr);margin:0}
+.rows dt,.rows dd{margin:0;padding:11px 0;border-bottom:1px solid var(--line)}
+.rows dt{color:var(--muted);font-size:.88rem}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.cta a{padding:10px 20px;border-radius:999px;text-decoration:none;font-size:.9rem;border:1px solid var(--tomato)}
+.cta a.go{background:var(--tomato);color:var(--bg)}
+.visit figure{margin:0}
+.visit img{width:100%;display:block}
+.visit figcaption{display:flex;gap:14px;align-items:center;margin-top:14px;font-size:.88rem;color:var(--muted)}
+.visit figcaption img{width:84px;flex:none}
+
+footer{padding-block:28px;text-align:center;font-size:.8rem;color:var(--muted)}
+.foot-link{color:var(--muted);font-size:.8rem}
+footer .it{font-size:1.1rem;color:var(--fg);display:block}
+
+@media (max-width:980px){.points{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){
+  .hero,.story,.visit .grid{grid-template-columns:minmax(0,1fr)}
+  .ribbon .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .intro,.facts,.news-grid{grid-template-columns:minmax(0,1fr)}
+  .teaser-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .news-list li{grid-template-columns:auto auto;}
+  .news-list li a{grid-column:1/-1}
+  .points{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#top">Fattoria CoMoTo</a>
+    <nav aria-label="サイト内"><a href="#news">お知らせ</a><a href="#about">こもとについて</a><a href="menu.html">メニュー</a><a href="#visit">アクセス</a><a href="https://www.instagram.com/fattoria.comoto" target="_blank" rel="noopener">Instagram</a></nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <h1>Fattoria<br>CoMoTo</h1>
+      <p class="sub">Soba cafe &amp; Farmer's restaurant</p>
+      <p class="lead">会津坂下・坂本の農家レストラン「ファットリアこもと」。<strong>自家栽培の野菜とお米</strong>、店の前の畑の蕎麦と小麦で、高寺芯そばも生パスタもピッツァも。地元の素材でつくる、自給自足のお裾分けです。</p>
+    </div>
+    <div class="mosaic">
+      <img src="images/pasta-genovese.jpg" alt="地元クルミのジェノベーゼ">
+      <img src="images/soba-zaru.jpg" alt="高寺芯そばのざる蕎麦">
+      <img src="images/pizza-bismarck.jpg" alt="地鶏卵のビスマルク">
+    </div>
+  </div>
+
+  <div class="ribbon">
+    <div class="wrap">
+      <div><b>11:00–15:00</b><span>ランチ</span></div>
+      <div><b>17:00–20:00</b><span>ディナー</span></div>
+      <div><b>月・第3火</b><span>定休日</span></div>
+      <div><b>P 17台</b><span>大型バスも駐車できます</span></div>
+    </div>
+  </div>
+
+  <section id="news" class="news">
+    <div class="wrap">
+      <div class="head"><div><p class="kicker">News</p><h2>新着情報</h2></div><p class="sample">※掲載内容は記入例です。実際のお知らせに差し替えてください。</p></div>
+      <div class="news-grid">
+        <!-- 目玉のお知らせ（新メニュー・期間限定）。写真・ラベル・文を差し替えて使います -->
+        <a class="feature" href="menu.html#soba">
+          <img src="images/soba-kamo.jpg" alt="温かい鴨の肉蕎麦">
+          <div class="feature-body">
+            <span class="tag tag-limited">期間限定</span>
+            <h3>寒い季節の、温かい鴨の肉蕎麦</h3>
+            <p>高寺芯そばを旨出汁のスープで。肉2倍の「肉増し」もできます。</p>
+            <span class="feature-meta">2026年11月〜2027年3月　1,550円（税込）</span>
+          </div>
+        </a>
+        <!-- お知らせ一覧。新しいものを上に1行ずつ追加します。ラベルは tag-new（新メニュー）／tag-limited（期間限定）／tag-info（お知らせ） -->
+        <ul class="news-list">
+          <li><time datetime="2026-10-03">2026.10.03</time><span class="tag tag-info">お知らせ</span><a href="#top">ホームページを公開しました</a></li>
+          <li><time datetime="2026-10-01">2026.10.01</time><span class="tag tag-new">新メニュー</span><a href="menu.html#cafe">自家焙煎コーヒーに「エチオピア ベダネ・ネギエッソ」が加わりました</a></li>
+          <li><time datetime="2026-09-20">2026.09.20</time><span class="tag tag-limited">期間限定</span><a href="menu.html#cafe">エクセレンスアイスコーヒーは10月末までの提供です</a></li>
+          <li><time datetime="2026-09-01">2026.09.01</time><span class="tag tag-new">新メニュー</span><a href="menu.html#rice">馬肉カレー 栗添え（中辛）はじめました</a></li>
+          <li><time datetime="2026-08-10">2026.08.10</time><span class="tag tag-info">お知らせ</span><a href="#visit">第3火曜日は定休日です</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="intro">
+        <div>
+          <div class="head"><div><p class="kicker">About</p><h2>地元の素材を、<br>地元のお店で。</h2></div></div>
+          <p>「こもと」は「地元素材のお料理を食べていただきたい」という思いから、平成28年5月にオープンした農家レストランです。</p>
+          <p>自家生産の野菜やお米、店の前の畑で二毛作する蕎麦と小麦「ゆきちから」を中心に、高寺芯そば、生パスタ、ピッツァ、カレーやソースカツ丼まで、素材を活かしたメニューをそろえています。</p>
+          <p>自家栽培、地元素材、人とのつながり、素材探しの旅。こもとの原点はそんなところにあります。</p>
+        </div>
+        <figure>
+          <img src="images/terrace.jpg" alt="赤い日よけの下に並ぶテラス席。奥に会津の山並み">
+          <figcaption>テラス席。晴れた日は会津の山を眺めながら。</figcaption>
+        </figure>
+      </div>
+      <div class="facts">
+        <div><b>1991〜</b><span>農業をはじめた年。お米から野菜、養鶏へ</span></div>
+        <div><b>水田 11ha</b><span>うち4haは紙マルチ栽培。お店のご飯は自家生産米</span></div>
+        <div><b>畑 110a</b><span>有機肥料100％・農薬不使用の野菜畑</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="story" style="padding-top:0">
+    <div class="wrap">
+      <div class="story">
+        <img src="images/exterior.jpg" alt="杉板張りの店舗外観とテラス">
+        <div>
+          <p class="kicker">Fattoria = 農園</p>
+          <h2>畑から、テーブルまで。</h2>
+          <p>1991年、「何でも自分たちで作ってみよう」と農業を始めました。お米から野菜、養鶏へと広がり、平成28年5月にこの農家レストランを開きました。</p>
+          <p>水田は11ヘクタール、畑は110アール。畑は有機肥料100％・農薬不使用です。坂本地区の畑では蕎麦と小麦「ゆきちから」を二毛作し、その地粉がお蕎麦やピッツァになります。</p>
+          <p>蕎麦のたれは、かつて営んでいたそば屋「みやま茶屋」創業以来の仕込みを受け継いでいます。</p>
+        </div>
+      </div>
+      <div class="points">
+        <article><h3>幻の蕎麦</h3><p>蕎麦の実の中心部だけ、全体の5割ほどの粉で打つ十割の高寺芯そば。地元の蕎麦打ち名人の手打ちです。</p></article>
+        <article><h3>国産小麦「セトデュール」の生パスタ</h3><p>国産のデュラム小麦「セトデュール」で打つ生パスタ。自家素材のトマトソースや、自家製クルミのバジルソースで。</p></article>
+        <article><h3>福島県産ゆきちからの自家製ピザ</h3><p>福島県産小麦「ゆきちから」の生地から自家製。自家製トマトソースと地元の素材で焼き上げます。</p></article>
+        <article><h3>平飼い地鶏の卵</h3><p>約300羽を自家栽培の飼料米で育てています。淡いレモン色の黄身が、プリンやオムライスの色になります。</p></article>
+        <article><h3>自家製コシヒカリのご飯</h3><p>今は無き「江戸鮨」のオーナーのお祖母が作ったソースのレシピを受け継いだ、伝統の味のソースカツ。お肉はやまと豚を使っています。</p></article>
+        <article><h3>こだわりのカフェ</h3><p>おすすめ珈琲は、スペシャルティコーヒーの生豆を自家焙煎。紅茶はガネッシュの「新茶の紅茶」。ミルクは地元の幻の牛乳「べこの乳」をあわせます。</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="menu-teaser" class="teaser">
+    <div class="wrap">
+      <div class="head"><div><p class="kicker">Menu</p><h2>蕎麦、パスタ、ピッツァ、ご飯もの</h2></div><a class="btn-menu" href="menu.html">メニューを見る</a></div>
+      <div class="teaser-grid">
+        <a href="menu.html#soba"><img src="images/soba-zaru.jpg" alt=""><span>高寺芯そば</span></a>
+        <a href="menu.html#pasta"><img src="images/pasta-carbonara.jpg" alt=""><span>生パスタ</span></a>
+        <a href="menu.html#pizza"><img src="images/pizza-formaggi.jpg" alt=""><span>ピッツァ</span></a>
+        <a href="menu.html#rice"><img src="images/katsudon.jpg" alt=""><span>ご飯もの</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" class="visit">
+    <div class="wrap grid">
+      <div>
+        <p class="kicker">Visit</p>
+        <h2 style="font-size:clamp(1.5rem,3vw,2rem);margin-bottom:18px">店舗案内・アクセス</h2>
+        <dl class="rows">
+          <dt>住所</dt><dd>〒969-6586 福島県河沼郡会津坂下町坂本糠塚乙1144</dd>
+          <dt>電話</dt><dd>0242-83-1101</dd>
+          <dt>営業時間</dt><dd>11:00〜15:00／17:00〜20:00<br><small>ラストオーダー：平日15分前・土日祝30分前</small></dd>
+          <dt>定休日</dt><dd>月曜日・第3火曜日</dd>
+          <dt>席数</dt><dd>約50席（テーブル9卓42席・カウンター2席・テラス約6席）</dd>
+          <dt>駐車場</dt><dd>17台（大型バス駐車可）</dd>
+          <dt>お支払い</dt><dd>クレジットカード・電子マネー・QRコード決済など主要なキャッシュレス決済に対応</dd>
+          <dt>車</dt><dd>磐越自動車道 会津坂下ICを降りてすぐ、国道49号沿い</dd>
+          <dt>電車</dt><dd>JR只見線 会津坂本駅から徒歩約18分</dd>
+        </dl>
+        <div class="cta">
+          <a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E7%A6%8F%E5%B3%B6%E7%9C%8C%E6%B2%B3%E6%B2%BC%E9%83%A1%E4%BC%9A%E6%B4%A5%E5%9D%82%E4%B8%8B%E7%94%BA%E5%9D%82%E6%9C%AC%E7%B3%A0%E5%A1%9A%E4%B9%991144" target="_blank" rel="noopener">Googleマップ</a>
+          <a href="https://www.instagram.com/fattoria.comoto" target="_blank" rel="noopener">Instagram @fattoria.comoto</a>
+          <a href="https://www.facebook.com/masayasu.igarashi" target="_blank" rel="noopener">こもとの裏方（Facebook）</a>
+        </div>
+      </div>
+      <figure>
+        <img src="images/shop-sign.jpg" alt="国道沿いの看板とお店の建物">
+        <figcaption><img src="images/owners.jpg" alt="お店の二人">団体・貸切のご相談はお電話でどうぞ。お水とおしぼりはセルフサービスです。</figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+
+<footer><span class="it">Fattoria CoMoTo</span>株式会社ファットリアこもと<br><a class="foot-link" href="https://www.facebook.com/masayasu.igarashi" target="_blank" rel="noopener">こもとの裏方（Facebook）</a></footer>
+
+</body>
+</html>
