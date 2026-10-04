@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>メニュー｜Fattoria CoMoTo</title>
+<meta name="description" content="ファットリアこもとのメニューの一例。高寺芯そば、トマトパスタ、ピッツァ、ご飯もの、一品料理、カフェ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;1,200;1,300;1,400&family=M+PLUS+2:wght@400;500;700&display=swap">
+<style>
+/* Layout: トップページ（案3）と同じトークン。カテゴリ見出し＋写真帯＋価格表の献立 */
+:root{
+  --bg:#ffffff; --tint:#f3f6f1; --fg:#1f2421; --muted:#636b66; --line:#e2e7e2;
+  --tomato:#c8372a; --basil:#2f6d36; --yolk:#e9b632;
+  --f-logo:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --f-body:"M PLUS 2","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141715; --tint:#1c211e; --fg:#eef1ee; --muted:#a3aca6; --line:#2d3430;
+  --tomato:#ef6b5c; --basil:#7fc488; --yolk:#f0c859; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141715; --tint:#1c211e; --fg:#eef1ee; --muted:#a3aca6; --line:#2d3430;
+  --tomato:#ef6b5c; --basil:#7fc488; --yolk:#f0c859; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.8;margin:0}
+img{max-width:100%}
+a{color:var(--tomato)}
+a:focus-visible{outline:2px solid var(--tomato);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.4}
+.kicker{font-family:var(--f-logo);font-style:italic;font-weight:400;color:var(--tomato);letter-spacing:.04em;margin:0}
+
+header{padding-block:16px}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size:1.5rem;text-decoration:none;color:var(--fg)}
+header nav{display:flex;gap:18px;flex-wrap:wrap;font-size:.88rem}
+header nav a{color:var(--fg);text-decoration:none}
+header nav a[aria-current]{color:var(--tomato)}
+
+.title{padding-block:24px 8px}
+.title h1{font-family:var(--f-logo);font-style:italic;font-weight:200;font-size:clamp(2.6rem,7vw,4.4rem);line-height:1}
+.title p{margin:.6em 0 0;color:var(--muted);font-size:.92rem;max-width:44em}
+
+.cats{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-block:1px solid var(--line);margin-top:20px}
+.cats .wrap{display:flex;gap:6px;overflow-x:auto;padding-block:10px;scrollbar-width:none}
+.cats a{flex:none;font-size:.85rem;padding:5px 14px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none;white-space:nowrap}
+.cats a:hover{border-color:var(--fg)}
+
+section{padding-block:48px;border-bottom:1px solid var(--line)}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.sec-head h2{font-size:clamp(1.35rem,2.6vw,1.75rem)}
+.sec-head .cond{font-size:.85rem;color:var(--basil);margin:0}
+.lede{margin:0 0 20px;max-width:44em;font-size:.95rem}
+.photos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:24px}
+.photos figure{margin:0}
+.photos img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:2px}
+.photos figcaption{font-size:.78rem;color:var(--muted);margin-top:4px;line-height:1.4}
+
+.list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:16px;padding:12px 0;border-bottom:1px dotted var(--line)}
+.item b{font-weight:500}
+.item .yen{font-family:var(--f-logo);font-weight:600;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.item small{grid-column:1/-1;color:var(--muted);font-size:.82rem;line-height:1.5}
+.badge{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 6px;border-radius:2px;margin-left:6px;vertical-align:2px;background:var(--tomato);color:var(--bg)}
+.badge.new{background:var(--basil)}
+.sub{font-size:.95rem;font-weight:700;margin:26px 0 4px;color:var(--basil)}
+.sub:first-child{margin-top:0}
+.note{font-size:.82rem;color:var(--muted);margin:16px 0 0}
+
+.foot{padding-block:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+.back{display:inline-block;margin-bottom:16px;padding:10px 22px;border-radius:999px;background:var(--fg);color:var(--bg);text-decoration:none}
+
+@media (max-width:760px){
+  .list{grid-template-columns:minmax(0,1fr)}
+  .photos{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+.pdf-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:18px}
+.btn-pdf{display:inline-block;padding:10px 22px;border-radius:999px;background:var(--tomato);color:var(--bg);text-decoration:none;font-size:.9rem}
+.names{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.names li{border:1px solid var(--line);border-radius:999px;padding:4px 14px;font-size:.9rem}
+.main-pick{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(20px,4vw,40px);align-items:center;margin-bottom:22px}
+.main-pick img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:2px}
+.main-pick h3{font-size:1.2rem;margin:0 0 .4em}
+.main-pick p{margin:0 0 .8em;font-size:.95rem}
+.pop{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:2px;background:var(--tomato);color:var(--bg);margin-bottom:6px}
+@media (max-width:760px){.main-pick{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">Fattoria CoMoTo</a>
+    <nav aria-label="サイト内"><a href="index.html#news">お知らせ</a><a href="index.html#about">こもとについて</a><a href="menu.html" aria-current="page">メニュー</a><a href="index.html#visit">アクセス</a><a href="https://www.instagram.com/fattoria.comoto" target="_blank" rel="noopener">Instagram</a></nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap title">
+    <p class="kicker">Menu</p>
+    <h1>Menu</h1>
+    <p>こもとは蕎麦屋を基本に、パスタやピッツァ、ご飯もの、カフェまで幅広くご用意しています。品数が多いため、ここではメニューの一例をご紹介します。季節や仕入れによって内容が変わることがあります。</p>
+    <div class="pdf-cta"><a class="btn-pdf" href="menu.pdf" target="_blank" rel="noopener">メニュー表（PDF）を見る</a><span class="note" style="margin:0">価格を含む全メニューはPDFでご覧いただけます。</span></div>
+  </div>
+
+  <nav class="cats" aria-label="メニューの種類">
+    <div class="wrap">
+      <a href="#soba">高寺芯そば</a><a href="#pasta">トマトパスタ・生パスタ</a><a href="#pizza">ピッツァ</a><a href="#rice">ご飯もの</a><a href="#alacarte">一品料理</a><a href="#cafe">カフェ・スイーツ</a><a href="#drinks">お酒</a>
+    </div>
+  </nav>
+
+  <section id="soba">
+    <div class="wrap">
+      <div class="sec-head"><h2>高寺芯そば</h2><p class="cond">こもとの看板</p></div>
+      <div class="main-pick">
+        <img src="images/soba-zaru.jpg" alt="高寺芯そばのざる蕎麦">
+        <div>
+          <span class="pop">看板メニュー</span>
+          <h3>「幻のお蕎麦」高寺芯そば</h3>
+          <p>地蕎麦の実の中心部だけを挽いた粉で、つなぎを使わずに打った十割蕎麦。白く透き通った、香りとコシのあるお蕎麦です。</p>
+          <p>たれは、かつて営んでいたそば屋「みやま茶屋」創業以来の仕込みを受け継いでいます。</p>
+        </div>
+      </div>
+      <h3 class="sub">洋風創作そば</h3>
+      <p class="lede">高寺芯そばをオリーブオイルやバジルソースで仕立てた、こもと独自の冷やがけそば。お店で人気の一品です。</p>
+      <div class="photos">
+        <figure><img src="images/soba-walnut-basil.jpg" alt="オーガニッククルミとバジルの冷やがけそば"><figcaption>オーガニッククルミとバジルの冷やがけそば</figcaption></figure>
+        <figure><img src="images/soba-olive.jpg" alt="オリーブオイルの冷やがけそば"><figcaption>オリーブオイルの冷やがけそば</figcaption></figure>
+      </div>
+      <h3 class="sub">そのほかの蕎麦</h3>
+      <div class="photos">
+        <figure><img src="images/soba-oroshi.jpg" alt="冷たいおろしのぶっかけ蕎麦"><figcaption>冷たいおろしのぶっかけ蕎麦</figcaption></figure>
+        <figure><img src="images/soba-kamo.jpg" alt="温かい鴨の肉蕎麦"><figcaption>温かい鴨の肉蕎麦</figcaption></figure>
+      </div>
+      <ul class="names"><li>ざる蕎麦</li><li>温かいかけ蕎麦 鴨肉添え</li><li>熱々出汁の冷たい鴨せいろ</li></ul>
+    </div>
+  </section>
+
+  <section id="pasta">
+    <div class="wrap">
+      <div class="sec-head"><h2>トマトパスタ・生パスタ</h2><p class="cond">国産小麦「セトデュール」の生パスタ</p></div>
+      <div class="main-pick">
+        <img src="images/pasta-tomato-veg.jpg" alt="自家素材トマトソースのパスタ">
+        <div>
+          <span class="pop">一番人気</span>
+          <h3>自家素材トマトソースのパスタ</h3>
+          <p>自家栽培のトマトで仕込むソースに、季節の野菜をたっぷり。こもとで一番人気のパスタです。</p>
+        </div>
+      </div>
+      <div class="photos">
+        <figure><img src="images/pasta-tomato.jpg" alt="マスカルポーネチーズのトマトパスタ"><figcaption>マスカルポーネチーズのトマトパスタ</figcaption></figure>
+        <figure><img src="images/pasta-genovese.jpg" alt="ジェノベーゼ"><figcaption>ジェノベーゼ</figcaption></figure>
+        <figure><img src="images/pasta-carbonara.jpg" alt="地鶏卵カルボナーラ"><figcaption>地鶏卵カルボナーラ</figcaption></figure>
+      </div>
+      <ul class="names"><li>ペペロンチーノ</li><li>やまと豚のボロネーゼ</li><li>牡蠣のペペロンチーノ</li><li>イワシとレモンのパスタ</li></ul>
+    </div>
+  </section>
+
+  <section id="pizza">
+    <div class="wrap">
+      <div class="sec-head"><h2>ピッツァ</h2><p class="cond">福島県産小麦「ゆきちから」の自家製生地</p></div>
+      <div class="photos">
+        <figure><img src="images/pizza-formaggi.jpg" alt="クワトロフォルマッジ"><figcaption>クワトロフォルマッジ</figcaption></figure>
+        <figure><img src="images/pizza-bismarck.jpg" alt="地鶏卵のビスマルク"><figcaption>地鶏卵のビスマルク</figcaption></figure>
+      </div>
+      <ul class="names"><li>自家素材のトマトピッツァ</li><li>地元クルミのバジリコピッツァ</li><li>やまと豚のラグーピッツァ</li></ul>
+    </div>
+  </section>
+
+  <section id="rice">
+    <div class="wrap">
+      <div class="sec-head"><h2>ご飯もの</h2><p class="cond">自家製コシヒカリ使用</p></div>
+      <div class="photos">
+        <figure><img src="images/katsudon.jpg" alt="やまと豚の焼きソースカツ丼"><figcaption>やまと豚の焼きソースカツ丼</figcaption></figure>
+        <figure><img src="images/omurice.jpg" alt="地鶏卵のオムライス"><figcaption>地鶏卵のオムライス</figcaption></figure>
+        <figure><img src="images/curry-green.jpg" alt="奥会津グリーンカレー"><figcaption>奥会津グリーンカレー</figcaption></figure>
+      </div>
+      <ul class="names"><li>奥会津マッサマンカレー</li><li>馬肉カレー 栗添え</li><li>やまと豚のラグー丼</li></ul>
+    </div>
+  </section>
+
+  <section id="alacarte">
+    <div class="wrap">
+      <div class="sec-head"><h2>一品料理</h2><p class="cond">お酒のおともにも</p></div>
+      <div class="photos">
+        <figure><img src="images/pickles.jpg" alt="季節の野菜の自家製ピクルス"><figcaption>季節の野菜の自家製ピクルス</figcaption></figure>
+        <figure><img src="images/sausage.jpg" alt="ソーセージ盛り合わせ"><figcaption>ソーセージ盛り合わせ</figcaption></figure>
+        <figure><img src="images/omelet.jpg" alt="地鶏卵のオムレツ"><figcaption>地鶏卵のオムレツ</figcaption></figure>
+        <figure><img src="images/ajillo.jpg" alt="アヒージョ"><figcaption>アヒージョ</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="cafe">
+    <div class="wrap">
+      <div class="sec-head"><h2>カフェ・スイーツ</h2></div>
+      <p class="lede">おすすめ珈琲はスペシャルティコーヒーの生豆を自家焙煎。紅茶はガネッシュの「新茶の紅茶」。ミルクは地元の幻の牛乳「べこの乳」をあわせます。</p>
+      <div class="photos">
+        <figure><img src="images/parfait.jpg" alt="自家製コーヒーゼリーのミニサンデー"><figcaption>自家製コーヒーゼリーのミニサンデー</figcaption></figure>
+      </div>
+      <ul class="names"><li>自家焙煎コーヒー</li><li>カフェラテ</li><li>新茶の紅茶</li><li>ロイヤルミルクティー</li><li>平飼い地鶏卵とべこの乳のぷりん</li><li>ぷりんソフト</li></ul>
+    </div>
+  </section>
+
+  <section id="drinks">
+    <div class="wrap">
+      <div class="sec-head"><h2>お酒</h2></div>
+      <p class="lede">イタリアワイン、海外のクラフトビール、会津坂下の地酒などをそろえています。</p>
+      <div class="pdf-cta"><a class="btn-pdf" href="menu.pdf" target="_blank" rel="noopener">メニュー表（PDF）を見る</a></div>
+    </div>
+  </section>
+</main>
+<div class="foot">
+  <a class="back" href="index.html">トップページへ戻る</a><br>
+  株式会社ファットリアこもと　〒969-6586 福島県河沼郡会津坂下町坂本糠塚乙1144　TEL 0242-83-1101
+</div>
+</body>
+</html>

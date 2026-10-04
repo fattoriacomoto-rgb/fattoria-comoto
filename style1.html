@@ -44,15 +44,14 @@ header nav a:hover{color:var(--tomato)}
 .hero .sub{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size:clamp(1.05rem,2vw,1.35rem);color:var(--basil);margin:.6em 0 1.2em}
 .hero .lead{font-size:1.02rem;max-width:26em;margin:0}
 .hero .lead strong{color:var(--tomato);font-weight:700}
-.slides{position:relative;aspect-ratio:3/2;overflow:hidden;border-radius:2px;background:var(--tint)}
-.slide{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.2s ease}
-.slide.on{opacity:1}
-.slide img{width:100%;height:100%;object-fit:cover;display:block}
-.slide figcaption{position:absolute;left:12px;bottom:12px;background:rgb(0 0 0 / .45);color:#fff;font-size:.82rem;padding:3px 10px;border-radius:2px}
-.dots{position:absolute;right:12px;bottom:14px;display:flex;gap:6px}
-.dots span{width:7px;height:7px;border-radius:50%;background:rgb(255 255 255 / .5)}
-.dots span.on{background:#fff}
-.story-slides{aspect-ratio:4/3}
+.mosaic{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:8px;aspect-ratio:3/2}
+.mosaic img{width:100%;height:100%;object-fit:cover;display:block;border-radius:2px}
+.mosaic > img:first-child{grid-column:span 2;grid-row:span 2}
+.rotator{position:relative;overflow:hidden;border-radius:2px}
+.rotator img{position:absolute;inset:0}
+.rotator img:nth-child(2){animation:swap 10s ease-in-out infinite}
+@keyframes swap{0%,40%{opacity:0}50%,90%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.rotator img:nth-child(2){animation:none;opacity:0}}
 
 .ribbon{background:var(--tint);border-block:1px solid var(--line)}
 .ribbon .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding-block:24px}
@@ -73,18 +72,14 @@ section{padding-block:clamp(56px,8vw,96px)}
 .feature p{margin:0 0 .6em;font-size:.92rem}
 .feature-meta{font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
 .feature:hover h3{color:var(--tomato)}
-.news-list{list-style:none;margin:0;padding:0 6px 0 0;border-top:1px solid var(--line);max-height:15rem;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
-.news-col{min-width:0}
-.news-more{font-size:.75rem;color:var(--muted);margin:6px 0 0;text-align:right}
-.news-list li{display:grid;grid-template-columns:6.2em 6.5em minmax(0,1fr);gap:4px 10px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--line);font-size:.92rem;line-height:1.5}
+.news-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.news-list li{display:grid;grid-template-columns:6.2em 6.5em minmax(0,1fr);gap:10px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line);font-size:.95rem}
 .news-list time{font-family:var(--f-logo);font-weight:500;font-size:.85rem;color:var(--muted);font-variant-numeric:tabular-nums}
 .news-list a{color:var(--fg);text-decoration:none}
 .news-list a:hover{color:var(--tomato);text-decoration:underline}
 .tag{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:2px;text-align:center;line-height:1.6;white-space:nowrap;justify-self:start}
 .tag-new{background:var(--basil);color:var(--bg)}
 .tag-limited{background:var(--tomato);color:var(--bg)}
-.tag-rice{background:var(--yolk);color:#1f2421}
-.tag-event{border:1px solid var(--basil);color:var(--basil)}
 .tag-info{border:1px solid var(--line);color:var(--muted)}
 .teaser{padding-top:0}
 .btn-menu{padding:10px 22px;border-radius:999px;background:var(--fg);color:var(--bg);text-decoration:none;font-size:.9rem}
@@ -164,21 +159,13 @@ footer .it{font-size:1.1rem;color:var(--fg);display:block}
       <p class="sub">Soba cafe &amp; Farmer's restaurant</p>
       <p class="lead">会津坂下・坂本の農家レストラン「ファットリアこもと」。<strong>自家栽培の野菜とお米</strong>、店の前の畑の蕎麦と小麦で、高寺芯そばも生パスタもピッツァも。地元の素材でつくる、自給自足のお裾分けです。</p>
     </div>
-    <div class="slides" aria-roledescription="スライドショー">
-      <figure class="slide on"><img src="images/soba-zaru.jpg" alt="高寺芯そば ざる蕎麦"><figcaption>高寺芯そば ざる蕎麦</figcaption></figure>
-      <figure class="slide"><img src="images/s-soba-olive.jpg" alt="オリーブオイルの冷やがけそば" loading="lazy"><figcaption>オリーブオイルの冷やがけそば</figcaption></figure>
-      <figure class="slide"><img src="images/s-pasta-tomato.jpg" alt="マスカルポーネのトマトパスタ" loading="lazy"><figcaption>マスカルポーネのトマトパスタ</figcaption></figure>
-      <figure class="slide"><img src="images/s-pasta-genovese.jpg" alt="ジェノベーゼ" loading="lazy"><figcaption>ジェノベーゼ</figcaption></figure>
-      <figure class="slide"><img src="images/s-pizza-salad.jpg" alt="イタリアンサラミと生ハムのサラダピッツァ" loading="lazy"><figcaption>サラミと生ハムのサラダピッツァ</figcaption></figure>
-      <figure class="slide"><img src="images/s-katsudon.jpg" alt="やまと豚の焼きソースカツ丼" loading="lazy"><figcaption>やまと豚の焼きソースカツ丼</figcaption></figure>
-      <figure class="slide"><img src="images/s-omurice.jpg" alt="地鶏卵のオムライス" loading="lazy"><figcaption>地鶏卵のオムライス</figcaption></figure>
-      <figure class="slide"><img src="images/s-curry-green.jpg" alt="奥会津グリーンカレー" loading="lazy"><figcaption>奥会津グリーンカレー</figcaption></figure>
-      <figure class="slide"><img src="images/s-sausage.jpg" alt="秋田ウマイケルのソーセージ" loading="lazy"><figcaption>秋田ウマイケルのソーセージ</figcaption></figure>
-      <figure class="slide"><img src="images/s-plate.jpg" alt="ご予約コース料理" loading="lazy"><figcaption>ご予約コース料理</figcaption></figure>
-      <figure class="slide"><img src="images/s-coffee.jpg" alt="自家焙煎コーヒー" loading="lazy"><figcaption>自家焙煎コーヒー</figcaption></figure>
-      <figure class="slide"><img src="images/exterior.jpg" alt="ファットリアこもとの外観" loading="lazy"><figcaption>店舗外観</figcaption></figure>
-      <figure class="slide"><img src="images/terrace.jpg" alt="テラス席" loading="lazy"><figcaption>テラス席</figcaption></figure>
-      <div class="dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="mosaic">
+      <img src="images/soba-olive-main.jpg" alt="オリーブオイルの冷やがけそば">
+      <img src="images/pasta-genovese-top.jpg" alt="チーズたっぷりのジェノベーゼ">
+      <div class="rotator">
+        <img src="images/katsudon-set.jpg" alt="やまと豚の焼きソースカツ丼">
+        <img src="images/omurice-set.jpg" alt="地鶏卵のオムライス">
+      </div>
     </div>
   </div>
 
@@ -193,32 +180,26 @@ footer .it{font-size:1.1rem;color:var(--fg);display:block}
 
   <section id="news" class="news">
     <div class="wrap">
-      <div class="head"><div><p class="kicker">News</p><h2>新着情報</h2></div></div>
+      <div class="head"><div><p class="kicker">News</p><h2>新着情報</h2></div><p class="sample">※掲載内容は記入例です。実際のお知らせに差し替えてください。</p></div>
       <div class="news-grid">
         <!-- 目玉のお知らせ（新メニュー・期間限定）。写真・ラベル・文を差し替えて使います -->
-        <a class="feature" href="menu.html#pizza">
-          <img src="images/pizza-nasu.jpg" alt="季節限定 茄子の味噌ピザ">
+        <a class="feature" href="menu.html#soba">
+          <img src="images/soba-kamo.jpg" alt="温かい鴨の肉蕎麦">
           <div class="feature-body">
-            <span class="tag tag-limited">季節限定</span>
-            <h3>季節限定 茄子の味噌ピザ 絶賛発売中</h3>
-            <p>茄子と味噌を合わせた、この季節だけのピザです。</p>
+            <span class="tag tag-limited">期間限定</span>
+            <h3>寒い季節の、温かい鴨の肉蕎麦</h3>
+            <p>高寺芯そばを旨出汁のスープで。肉2倍の「肉増し」もできます。</p>
+            <span class="feature-meta">2026年11月〜2027年3月</span>
           </div>
         </a>
-        <!-- お知らせ一覧。新しいものを上に1行ずつ追加します。ラベルの色：tag-new（緑）／tag-limited（赤）／tag-rice（黄）／tag-event（緑枠）／tag-info（灰枠） -->
-        <div class="news-col">
+        <!-- お知らせ一覧。新しいものを上に1行ずつ追加します。ラベルは tag-new（新メニュー）／tag-limited（期間限定）／tag-info（お知らせ） -->
         <ul class="news-list">
-          <li><time datetime="2026-10-04">2026.10.04</time><span class="tag tag-limited">季節限定</span><a href="menu.html#pizza">季節限定 茄子の味噌ピザ 絶賛発売中</a></li>
-          <li><time datetime="2026-10-03">2026.10.03</time><span class="tag tag-rice">新米</span><span>新米 特別栽培コシヒカリの販売を始めました</span></li>
-          <li><time datetime="2026-09-05">2026.09.05</time><span class="tag tag-rice">新米</span><span>新米「五百川」の販売を始めました</span></li>
-          <li><time datetime="2026-09-05">2026.09.05</time><span class="tag tag-event">イベント</span><span>こもとフェスを開催しました</span></li>
-          <li><time datetime="2026-09-01">2026.09.01</time><span class="tag tag-event">まちゼミ</span><span>まちゼミ「コーヒー講座」「ハンドクラフト講座」の募集が始まりました</span></li>
-          <li><time datetime="2026-08-29">2026.08.29</time><span class="tag tag-info">農園</span><span>令和8年の稲刈りが始まりました</span></li>
-          <li><time datetime="2026-08-01">2026.08.01</time><span class="tag tag-new">新メニュー</span><a href="menu.html#pasta">ラム肉のボロネーゼの提供を始めました</a></li>
-          <li><time datetime="2026-08">2026.08</time><span class="tag tag-new">カフェ</span><a href="menu.html#cafe">自家焙煎コーヒーを始めました</a></li>
-          <li><time datetime="2026-07">2026.07</time><span class="tag tag-new">新メニュー</span><a href="menu.html#rice">栗入り馬肉カレーの提供を始めました</a></li>
+          <li><time datetime="2026-10-03">2026.10.03</time><span class="tag tag-info">お知らせ</span><a href="#top">ホームページを公開しました</a></li>
+          <li><time datetime="2026-10-01">2026.10.01</time><span class="tag tag-new">新メニュー</span><a href="menu.html#cafe">自家焙煎コーヒーに「エチオピア ベダネ・ネギエッソ」が加わりました</a></li>
+          <li><time datetime="2026-09-20">2026.09.20</time><span class="tag tag-limited">期間限定</span><a href="menu.html#cafe">エクセレンスアイスコーヒーは10月末までの提供です</a></li>
+          <li><time datetime="2026-09-01">2026.09.01</time><span class="tag tag-new">新メニュー</span><a href="menu.html#rice">馬肉カレー 栗添え（中辛）はじめました</a></li>
+          <li><time datetime="2026-08-10">2026.08.10</time><span class="tag tag-info">お知らせ</span><a href="#visit">第3火曜日は定休日です</a></li>
         </ul>
-        <p class="news-more">一覧をスクロールすると過去のお知らせを見られます</p>
-        </div>
       </div>
     </div>
   </section>
@@ -248,13 +229,7 @@ footer .it{font-size:1.1rem;color:var(--fg);display:block}
   <section id="story" style="padding-top:0">
     <div class="wrap">
       <div class="story">
-        <div class="slides story-slides">
-          <figure class="slide on"><img src="images/exterior.jpg" alt="杉板張りの店舗外観とテラス"><figcaption>お店</figcaption></figure>
-          <figure class="slide"><img src="images/farm-vegetable.jpg" alt="店の前の野菜畑" loading="lazy"><figcaption>野菜畑</figcaption></figure>
-          <figure class="slide"><img src="images/farm-soba.jpg" alt="白い花が咲く蕎麦畑" loading="lazy"><figcaption>蕎麦畑</figcaption></figure>
-          <figure class="slide"><img src="images/farm-rice.jpg" alt="実りの秋の田んぼ" loading="lazy"><figcaption>田んぼ</figcaption></figure>
-          <div class="dots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
-        </div>
+        <img src="images/exterior.jpg" alt="杉板張りの店舗外観とテラス">
         <div>
           <p class="kicker">Fattoria = 農園</p>
           <h2>畑から、テーブルまで。</h2>
@@ -318,23 +293,5 @@ footer .it{font-size:1.1rem;color:var(--fg);display:block}
 
 <footer><span class="it">Fattoria CoMoTo</span>株式会社ファットリアこもと<br><a class="foot-link" href="https://www.facebook.com/masayasu.igarashi" target="_blank" rel="noopener">こもとの裏方（Facebook）</a></footer>
 
-<script>
-(function(){
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('.slides').forEach(function(box,n){
-    var slides=box.querySelectorAll('.slide'), dots=box.querySelectorAll('.dots span'), i=0;
-    if(!slides.length) return;
-    dots[0] && dots[0].classList.add('on');
-    if(reduce || slides.length<2) return;
-    setTimeout(function(){
-      setInterval(function(){
-        slides[i].classList.remove('on'); dots[i] && dots[i].classList.remove('on');
-        i=(i+1)%slides.length;
-        slides[i].classList.add('on'); dots[i] && dots[i].classList.add('on');
-      },4500);
-    }, n*1500);
-  });
-})();
-</script>
 </body>
 </html>
