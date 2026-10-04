@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>お知らせ一覧｜Fattoria CoMoTo</title>
+<meta name="description" content="ファットリアこもとのお知らせ一覧。新メニュー、新米、農園やイベントの写真つきの記録です。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;1,200;1,300;1,400&family=M+PLUS+2:wght@400;500;700&display=swap">
+<style>
+/* Layout: トップページと同じ色・書体。月ごとの見出しの下に、写真と本文の記事を新しい順に並べる */
+:root{
+  --bg:#ffffff; --tint:#f3f6f1; --fg:#1f2421; --muted:#636b66; --line:#e2e7e2;
+  --tomato:#c8372a; --basil:#2f6d36; --yolk:#e9b632; --ink:#1f2421;
+  --f-logo:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --f-body:"M PLUS 2","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141715; --tint:#1c211e; --fg:#eef1ee; --muted:#a3aca6; --line:#2d3430;
+  --tomato:#ef6b5c; --basil:#7fc488; --yolk:#f0c859; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141715; --tint:#1c211e; --fg:#eef1ee; --muted:#a3aca6; --line:#2d3430;
+  --tomato:#ef6b5c; --basil:#7fc488; --yolk:#f0c859; color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:16px}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.85;margin:0}
+img{max-width:100%}
+a{color:var(--tomato)}
+a:focus-visible{outline:2px solid var(--tomato);outline-offset:3px}
+.wrap{max-width:960px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.4}
+.kicker{font-family:var(--f-logo);font-style:italic;font-weight:400;color:var(--tomato);letter-spacing:.04em;font-size:1rem;margin:0}
+
+header{padding-block:16px}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+header .logo{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size:1.5rem;text-decoration:none;color:var(--fg)}
+header nav{display:flex;gap:18px;flex-wrap:wrap;font-size:.88rem}
+header nav a{color:var(--fg);text-decoration:none}
+header nav a:hover{color:var(--tomato)}
+
+.page-head{padding-block:clamp(28px,5vw,56px) 8px;border-bottom:1px solid var(--line)}
+.page-head h1{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:700;margin:.15em 0 .4em}
+.page-head p{margin:0 0 24px;color:var(--muted);font-size:.92rem}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.filters button{font:inherit;font-size:.82rem;padding:4px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+
+.month{padding-block:28px 8px}
+.month h2{font-family:var(--f-logo);font-weight:500;font-size:.95rem;color:var(--muted);letter-spacing:.06em;font-variant-numeric:tabular-nums;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.entry{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:clamp(16px,3vw,32px);padding-block:24px;border-bottom:1px solid var(--line)}
+.entry:target{background:var(--tint);box-shadow:0 0 0 12px var(--tint);border-bottom-color:transparent}
+.entry.no-photo{grid-template-columns:minmax(0,1fr)}
+.photos{display:grid;gap:8px;align-content:start}
+.photos.two{grid-template-columns:1fr 1fr}
+.photos figure{margin:0}
+.photos img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:2px;background:var(--tint)}
+.photos img.tall{aspect-ratio:3/4}
+.photos img.wide{aspect-ratio:16/9}
+.photos img.natural{aspect-ratio:auto;object-fit:contain}
+@media (max-width:640px){.photos img.tall{max-width:320px}}
+.photos figcaption{font-size:.78rem;color:var(--muted);margin-top:4px;line-height:1.5}
+.meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.meta time{font-family:var(--f-logo);font-weight:500;font-size:.88rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.entry h3{font-size:1.15rem;margin:.45em 0 .35em}
+.entry p{margin:0 0 .7em;max-width:36em}
+.more{font-size:.9rem}
+
+.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:2px;line-height:1.6;white-space:nowrap}
+.tag-new{background:var(--basil);color:var(--bg)}
+.tag-limited{background:var(--tomato);color:var(--bg)}
+.tag-rice{background:var(--yolk);color:var(--ink)}
+.tag-event{border:1px solid var(--basil);color:var(--basil)}
+.tag-info{border:1px solid var(--line);color:var(--muted)}
+
+.back{padding-block:40px 8px}
+.back a{display:inline-block;padding:10px 22px;border-radius:999px;background:var(--fg);color:var(--bg);text-decoration:none;font-size:.9rem}
+footer{padding-block:28px;text-align:center;font-size:.8rem;color:var(--muted)}
+footer .it{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size:1.1rem;color:var(--fg);display:block}
+footer a{color:var(--muted)}
+
+@media (max-width:640px){
+  .entry{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">Fattoria CoMoTo</a>
+    <nav aria-label="サイト内"><a href="index.html#news">新着情報</a><a href="index.html#about">こもとについて</a><a href="menu.html">メニュー</a><a href="index.html#visit">アクセス</a><a href="index.html#contact">お問い合わせ</a><a href="https://www.instagram.com/fattoria.comoto" target="_blank" rel="noopener">Instagram</a></nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page-head">
+    <p class="kicker">News Archive</p>
+    <h1>お知らせ一覧</h1>
+    <p>新メニュー、新米、畑や田んぼ、イベントの様子を写真とともに残しています。</p>
+    <div class="filters" role="group" aria-label="種類で絞り込む">
+      <button type="button" id="f-all" data-f="all" aria-pressed="true">すべて</button>
+      <button type="button" id="f-menu" data-f="menu" aria-pressed="false">メニュー</button>
+      <button type="button" id="f-rice" data-f="rice" aria-pressed="false">新米</button>
+      <button type="button" id="f-farm" data-f="farm" aria-pressed="false">農園</button>
+      <button type="button" id="f-event" data-f="event" aria-pressed="false">イベント</button>
+    </div>
+  </div>
+
+  <!--
+    ■ お知らせの追加方法
+    1. 写真を images/news/ フォルダに入れる（例：images/news/20260922-imo.jpg）
+    2. 該当する月の <section> の一番上に <article> を1つ追加する
+       id は「n」＋日付（同じ日が2件あれば末尾に -2）。トップページの新着情報からは news.html#n20260922 のようにリンクする
+    3. data-cat：menu（メニュー）／rice（新米）／farm（農園）／event（イベント）
+    4. 写真が無いときは <div class="photos">…</div> を消し、article の class に no-photo を付ける
+  -->
+
+  <section class="month" aria-labelledby="m202610">
+    <h2 id="m202610">2026年10月</h2>
+
+    <article class="entry" id="n20261004" data-cat="menu">
+      <div class="photos">
+        <figure><img src="images/pizza-nasu.jpg" alt="季節限定 茄子の味噌ピザ"></figure>
+      </div>
+      <div>
+        <div class="meta"><time datetime="2026-10-04">2026.10.04</time><span class="tag tag-limited">季節限定</span></div>
+        <h3>季節限定 茄子の味噌ピザ 絶賛発売中</h3>
+        <p>茄子と味噌を合わせた、この季節だけのピザです。</p>
+        <a class="more" href="menu.html#pizza">ピッツァのメニューを見る</a>
+      </div>
+    </article>
+
+    <article class="entry no-photo" id="n20261003" data-cat="event">
+      <div>
+        <div class="meta"><time datetime="2026-10-03">2026.10.03</time><span class="tag tag-event">イベント</span></div>
+        <h3>こもとの里山（玄ちゃんの森）で森のコンサートが開かれました</h3>
+        <a class="more" href="https://www.instagram.com/p/DeBym6gE5T6/" target="_blank" rel="noopener">Instagramで当日の様子を見る</a>
+      </div>
+    </article>
+
+    <article class="entry" id="n20261003-2" data-cat="rice">
+      <div class="photos">
+        <figure><img class="tall natural" src="images/news/20261003-koshihikari.jpg" alt="令和八年産 特別栽培コシヒカリ 2kg袋"></figure>
+      </div>
+      <div>
+        <div class="meta"><time datetime="2026-10-03">2026.10.03</time><span class="tag tag-rice">新米</span></div>
+        <h3>新米 特別栽培コシヒカリの販売を始めました</h3>
+      </div>
+    </article>
+  </section>
+
+  <section class="month" aria-labelledby="m202609">
+    <h2 id="m202609">2026年9月</h2>
+
+    <article class="entry" id="n20260922" data-cat="farm">
+      <div class="photos">
+        <figure><img class="tall" src="images/news/20260922-imo.jpg" alt="畑から掘り出したさつまいも" loading="lazy"></figure>
+      </div>
+      <div>
+        <div class="meta"><time datetime="2026-09-22">2026.09.22</time><span class="tag tag-info">農園</span></div>
+        <h3>さつまいもを収穫しました</h3>
+        <p>現在キュアリング（熟成）中です。今年も「こもと芋のブリュレ」をお出しします。</p>
+      </div>
+    </article>
+
+    <article class="entry no-photo" id="n20260905" data-cat="rice">
+      <div>
+        <div class="meta"><time datetime="2026-09-05">2026.09.05</time><span class="tag tag-rice">新米</span></div>
+        <h3>新米「五百川」の販売を始めました</h3>
+      </div>
+    </article>
+
+    <article class="entry" id="n20260905-2" data-cat="event">
+      <div class="photos">
+        <figure><img class="wide" src="images/news/20260905-fes.jpg" alt="こもとフェスの出演者とスタッフの集合写真" loading="lazy"></figure>
+      </div>
+      <div>
+        <div class="meta"><time datetime="2026-09-05">2026.09.05</time><span class="tag tag-event">イベント</span></div>
+        <h3>こもとフェスを開催しました</h3>
+      </div>
+    </article>
+
+    <article class="entry" id="n20260901" data-cat="farm">
+      <div class="photos">
+        <figure><img class="tall" src="images/news/20260901-goat.jpg" alt="小屋の中に並ぶヤギの親子" loading="lazy"></figure>
+      </div>
+      <div>
+        <div class="meta"><time datetime="2026-09-01">2026.09.01</time><span class="tag tag-info">農園</span></div>
+        <h3>こもとのヤギにまた赤ちゃんが生まれました</h3>
+      </div>
+    </article>
+
+    <article class="entry no-photo" id="n20260901-2" data-cat="event">
+      <div>
+        <div class="meta"><time datetime="2026-09-01">2026.09.01</time><span class="tag tag-event">まちゼミ</span></div>
+        <h3>会津坂下町商工会まちゼミで、こもとが主催する「世界を旅するコーヒー紀行」「暮らしを彩るクラフト講座」の募集が始まりました</h3>
+        <a class="more" href="https://www.bange-bonge.jp/matizemi/" target="_blank" rel="noopener">まちゼミの詳細・お申し込みはこちら</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="month" aria-labelledby="m202608">
+    <h2 id="m202608">2026年8月</h2>
+
+    <article class="entry" id="n20260829" data-cat="farm">
+      <div class="photos">
+        <figure><img src="images/farm-rice.jpg" alt="稲刈り前の田んぼ" loading="lazy"></figure>
+      </div>
+      <div>
+        <div class="meta"><time datetime="2026-08-29">2026.08.29</time><span class="tag tag-info">農園</span></div>
+        <h3>令和8年の稲刈りが始まりました</h3>
+      </div>
+    </article>
+
+    <article class="entry" id="n20260801" data-cat="menu">
+      <div class="photos">
+        <figure><img class="wide" src="images/news/20260801-lamb.jpg" alt="ラム肉のボロネーゼ。オクラ、黄色いズッキーニ、ミニトマト入り" loading="lazy"></figure>
+      </div>
+      <div>
+        <div class="meta"><time datetime="2026-08-01">2026.08.01</time><span class="tag tag-new">新メニュー</span></div>
+        <h3>ラム肉のボロネーゼの提供を始めました</h3>
+        <a class="more" href="menu.html#pasta">パスタのメニューを見る</a>
+      </div>
+    </article>
+
+    <article class="entry" id="n202608" data-cat="menu">
+      <div class="photos">
+        <figure><img class="tall" src="images/news/202608-roast.jpg" alt="お店の焙煎機と、焙煎したコーヒー豆の袋" loading="lazy"></figure>
+      </div>
+      <div>
+        <div class="meta"><time datetime="2026-08">2026.08</time><span class="tag tag-new">カフェ</span></div>
+        <h3>自家焙煎コーヒーを始めました</h3>
+        <p>スペシャルティコーヒーの生豆を、お店で焙煎しています。</p>
+        <a class="more" href="menu.html#cafe">カフェメニューを見る</a>
+      </div>
+    </article>
+  </section>
+
+  <section class="month" aria-labelledby="m202607">
+    <h2 id="m202607">2026年7月</h2>
+
+    <article class="entry" id="n202607" data-cat="menu">
+      <div class="photos">
+        <figure><img class="wide" src="images/news/202607-curry.jpg" alt="栗入り馬肉カレー" loading="lazy"></figure>
+      </div>
+      <div>
+        <div class="meta"><time datetime="2026-07">2026.07</time><span class="tag tag-new">新メニュー</span></div>
+        <h3>栗入り馬肉カレーの提供を始めました</h3>
+        <a class="more" href="menu.html#rice">ご飯もののメニューを見る</a>
+      </div>
+    </article>
+  </section>
+
+  <div class="back"><a href="index.html">トップページへ戻る</a></div>
+</main>
+
+<footer><span class="it">Fattoria CoMoTo</span>株式会社ファットリアこもと<br><a href="mailto:fattoria.comoto@gmail.com">fattoria.comoto@gmail.com</a></footer>
+
+<script>
+(function(){
+  var btns=document.querySelectorAll('.filters button');
+  var entries=document.querySelectorAll('.entry');
+  var months=document.querySelectorAll('.month');
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      var f=b.dataset.f;
+      btns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      entries.forEach(function(e){e.hidden=!(f==='all'||e.dataset.cat===f)});
+      months.forEach(function(m){m.hidden=!m.querySelector('.entry:not([hidden])')});
+    });
+  });
+})();
+</script>
+</body>
+</html>
