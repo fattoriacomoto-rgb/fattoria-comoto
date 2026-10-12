@@ -197,7 +197,7 @@ var EXTRA_OPEN = {
       if(k<todayKey) cls+=" past";
       if(k===todayKey) cls+=" today";
       var label=(mo+1)+"月"+day+"日（"+WD[w]+"）"+(HOLIDAYS[k]?" "+HOLIDAYS[k]:"")+(closed[k]?" お休み":" 営業");
-      var lb = EXTRA_OPEN[k] || EXTRA_CLOSED[k] || (HOLIDAYS[k] && !closed[k] ? "祝日営業" : "");
+      var lb = EXTRA_OPEN[k] || EXTRA_CLOSED[k] || (closed[k] ? "休業日" : HOLIDAYS[k] ? "祝日営業" : "");
       if(EXTRA_OPEN[k]) cls+=" special";
       if(lb){ cls+=" has-lb"; label+="（"+lb+"）"; }
       cells+='<div class="'+cls+'" title="'+label+'" aria-label="'+label+'">'+day+(lb?'<span class="lb" aria-hidden="true">'+lb+'</span>':'')+'</div>';
