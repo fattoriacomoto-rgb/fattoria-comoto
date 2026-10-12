@@ -58,11 +58,17 @@ header .logo{font-family:var(--f-logo);font-style:italic;font-weight:300;font-si
 .grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center;font-variant-numeric:tabular-nums}
 .dow{font-size:.72rem;color:var(--muted);padding-bottom:2px}
 .dow.su{color:var(--sun)}.dow.sa{color:var(--sat)}
-.d{position:relative;aspect-ratio:1/1;max-width:100%;display:flex;align-items:center;justify-content:center;font-family:var(--f-logo);font-weight:500;font-size:.92rem;border-radius:3px;color:var(--fg)}
+.d{position:relative;aspect-ratio:1/1;max-width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-family:var(--f-logo);font-weight:500;font-size:.92rem;border-radius:3px;color:var(--fg)}
 .d.su,.d.hol{color:var(--sun)}
 .d.sa{color:var(--sat)}
 .d.hol::after{content:"";position:absolute;left:28%;right:28%;bottom:12%;height:2px;border-radius:1px;background:var(--yolk)}
 .d.closed{background:var(--tomato);color:var(--on-accent)}
+.d .lb{display:block;font-family:var(--f-body);font-weight:700;font-size:.56rem;line-height:1.15;letter-spacing:-.02em;word-break:keep-all;overflow-wrap:anywhere}
+.d.has-lb{aspect-ratio:auto;min-height:100%}
+.d.has-lb.hol::after{display:none}
+.d.special{background:var(--basil);color:var(--on-accent)}
+.notes .o{color:var(--basil);font-weight:500}
+.sw.special{background:var(--basil);border-color:var(--basil)}
 .d.past{opacity:.35}
 .d.today{box-shadow:inset 0 0 0 2px var(--fg)}
 .d.closed.today{box-shadow:inset 0 0 0 2px var(--on-accent),0 0 0 2px var(--tomato)}
@@ -107,6 +113,7 @@ footer .it{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size
       <span><i class="sw closed"></i>お休み</span>
       <span><i class="sw"></i>営業日</span>
       <span><i class="sw hol"></i>祝日（営業）</span>
+      <span><i class="sw special"></i>特別営業日</span>
     </p>
   </div>
 
@@ -142,8 +149,12 @@ var HOLIDAYS = {
   "2027-03-21":"春分の日",
   "2027-03-22":"振替休日"
 };
-var EXTRA_CLOSED = {};
-var EXTRA_OPEN = {};
+var EXTRA_CLOSED = {
+  "2026-11-04":"臨時休業"
+};
+var EXTRA_OPEN = {
+  "2026-11-02":"特別営業日"
+};
 /* ===== 設定ここまで ===== */
 
 (function(){
@@ -187,10 +198,14 @@ var EXTRA_OPEN = {};
       if(k<todayKey) cls+=" past";
       if(k===todayKey) cls+=" today";
       var label=(mo+1)+"月"+day+"日（"+WD[w]+"）"+(HOLIDAYS[k]?" "+HOLIDAYS[k]:"")+(closed[k]?" お休み":" 営業");
-      cells+='<div class="'+cls+'" title="'+label+'" aria-label="'+label+'">'+day+'</div>';
+      var lb = EXTRA_OPEN[k] || EXTRA_CLOSED[k] || "";
+      if(EXTRA_OPEN[k]) cls+=" special";
+      if(lb){ cls+=" has-lb"; label+="（"+lb+"）"; }
+      cells+='<div class="'+cls+'" title="'+label+'" aria-label="'+label+'">'+day+(lb?'<span class="lb" aria-hidden="true">'+lb+'</span>':'')+'</div>';
       // 月曜の定休日以外（第3火曜・振替・年末年始・祝日の営業）は下に一言添える
       var txt="";
       if(closed[k] && closed[k]!=="定休日") txt='<span class="c">お休み</span> '+closed[k]+(HOLIDAYS[k]?"・"+HOLIDAYS[k]:"");
+      else if(EXTRA_OPEN[k]) txt='<span class="o">営業します</span> '+EXTRA_OPEN[k]+(HOLIDAYS[k]?"・"+HOLIDAYS[k]:"");
       else if(!closed[k] && HOLIDAYS[k]) txt=HOLIDAYS[k]+"・営業します";
       if(txt) notes+='<li><time>'+(mo+1)+'/'+day+'（'+WD[w]+'）</time><span>'+txt+'</span></li>';
     }
