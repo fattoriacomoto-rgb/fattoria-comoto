@@ -112,7 +112,6 @@ footer .it{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size
     <p class="legend" aria-hidden="true">
       <span><i class="sw closed"></i>お休み</span>
       <span><i class="sw"></i>営業日</span>
-      <span><i class="sw hol"></i>祝日（営業）</span>
       <span><i class="sw special"></i>特別営業日</span>
     </p>
   </div>
@@ -198,7 +197,7 @@ var EXTRA_OPEN = {
       if(k<todayKey) cls+=" past";
       if(k===todayKey) cls+=" today";
       var label=(mo+1)+"月"+day+"日（"+WD[w]+"）"+(HOLIDAYS[k]?" "+HOLIDAYS[k]:"")+(closed[k]?" お休み":" 営業");
-      var lb = EXTRA_OPEN[k] || EXTRA_CLOSED[k] || "";
+      var lb = EXTRA_OPEN[k] || EXTRA_CLOSED[k] || (HOLIDAYS[k] && !closed[k] ? "祝日営業" : "");
       if(EXTRA_OPEN[k]) cls+=" special";
       if(lb){ cls+=" has-lb"; label+="（"+lb+"）"; }
       cells+='<div class="'+cls+'" title="'+label+'" aria-label="'+label+'">'+day+(lb?'<span class="lb" aria-hidden="true">'+lb+'</span>':'')+'</div>';
