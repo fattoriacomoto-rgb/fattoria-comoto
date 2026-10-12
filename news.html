@@ -98,6 +98,19 @@ header nav a:hover{color:var(--tomato)}
   .head-right{align-items:stretch;width:100%}
   .page-tabs a{flex:1;text-align:center;padding-inline:8px}
 }
+/* ヘッダーのメニュー（横一列） */
+.topnav{display:flex;flex-wrap:nowrap;align-items:center;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--tint);max-width:100%;overflow-x:auto;scrollbar-width:none;line-height:1.85}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{flex:0 0 auto;display:block;padding:5px 14px;border-radius:999px;font-size:.86rem;font-weight:500;color:var(--fg);text-decoration:none;white-space:nowrap}
+.topnav a:hover{background:var(--bg);color:var(--tomato)}
+.topnav a[aria-current="page"]{background:var(--bg);color:var(--tomato);box-shadow:0 0 0 1px var(--line)}
+.topnav a.cal{background:var(--tomato);color:var(--bg);box-shadow:none}
+.topnav a.cal:hover{background:var(--fg);color:var(--bg)}
+@media (max-width:760px){
+  header .wrap{flex-direction:column;align-items:stretch;gap:10px}
+  .topnav{border-radius:12px}
+  .topnav a{padding-inline:11px}
+}
 </style>
 </head>
 <body>
@@ -105,10 +118,7 @@ header nav a:hover{color:var(--tomato)}
 <header>
   <div class="wrap">
     <a class="logo" href="index.html">Fattoria CoMoTo</a>
-    <div class="head-right">
-      <nav class="page-tabs" aria-label="ページ"><a aria-current="page" href="news.html">お知らせ一覧</a><a href="menu.html">メニュー</a><a class="cal" target="_blank" rel="noopener" href="calendar.html">営業日カレンダー</a></nav>
-      <nav aria-label="サイト内"><a href="index.html#news">お知らせ</a><a href="index.html#about">こもとについて</a><a href="index.html#visit">アクセス</a><a href="index.html#contact">お問い合わせ</a><a href="https://www.instagram.com/fattoria.comoto" target="_blank" rel="noopener">Instagram</a></nav>
-    </div>
+    <nav class="topnav" aria-label="サイト内"><a aria-current="page" href="news.html">お知らせ一覧</a><a href="menu.html">メニュー</a><a class="cal" target="_blank" rel="noopener" href="calendar.html">営業日カレンダー</a><a href="index.html#about">こもとについて</a><a href="index.html#visit">アクセス</a><a href="index.html#contact">お問い合わせ</a><a target="_blank" rel="noopener" href="https://www.instagram.com/fattoria.comoto">Instagram</a></nav>
   </div>
 </header>
 
