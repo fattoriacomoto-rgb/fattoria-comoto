@@ -35,9 +35,20 @@ h2,h3{text-wrap:balance;margin:0;line-height:1.4}
 header{padding-block:16px}
 header .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
 header .logo{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size:1.5rem;text-decoration:none;color:var(--fg)}
-header nav{display:flex;gap:18px;flex-wrap:wrap;font-size:.88rem}
+header nav{display:flex;gap:0 18px;flex-wrap:wrap;font-size:.88rem;line-height:1.9}
 header nav a{color:var(--fg);text-decoration:none}
 header nav a:hover{color:var(--tomato)}
+.head-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;min-width:0}
+.page-tabs{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;background:var(--tint)}
+.page-tabs a{display:block;padding:5px 16px;border-radius:999px;font-size:.86rem;font-weight:500;color:var(--fg);text-decoration:none;white-space:nowrap}
+.page-tabs a:hover{background:var(--bg);color:var(--tomato)}
+.page-tabs a.cal{background:var(--tomato);color:var(--bg)}
+.page-tabs a.cal:hover{background:var(--fg);color:var(--bg)}
+@media (max-width:760px){
+  .head-right{align-items:stretch;width:100%}
+  .page-tabs{justify-content:space-between}
+  .page-tabs a{flex:1;text-align:center;padding-inline:8px}
+}
 
 .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);align-items:center;padding-block:clamp(24px,5vw,56px) clamp(48px,7vw,80px)}
 .hero h1{font-family:var(--f-logo);font-style:italic;font-weight:200;font-size:clamp(3rem,9vw,6.4rem);line-height:.95;margin:0;letter-spacing:-.01em}
@@ -164,7 +175,10 @@ footer .it{font-size:1.1rem;color:var(--fg);display:block}
 <header>
   <div class="wrap">
     <a class="logo" href="#top">Fattoria CoMoTo</a>
-    <nav aria-label="サイト内"><a href="#news">お知らせ</a><a href="#about">こもとについて</a><a href="menu.html">メニュー</a><a href="calendar.html" target="_blank" rel="noopener">営業日カレンダー</a><a href="#visit">アクセス</a><a href="#contact">お問い合わせ</a><a href="https://www.instagram.com/fattoria.comoto" target="_blank" rel="noopener">Instagram</a></nav>
+    <div class="head-right">
+      <nav class="page-tabs" aria-label="ページ"><a href="news.html">お知らせ一覧</a><a href="menu.html">メニュー</a><a class="cal" href="calendar.html" target="_blank" rel="noopener">営業日カレンダー</a></nav>
+      <nav aria-label="このページ内"><a href="#news">お知らせ</a><a href="#about">こもとについて</a><a href="#visit">アクセス</a><a href="#contact">お問い合わせ</a><a href="https://www.instagram.com/fattoria.comoto" target="_blank" rel="noopener">Instagram</a></nav>
+    </div>
   </div>
 </header>
 
@@ -197,7 +211,7 @@ footer .it{font-size:1.1rem;color:var(--fg);display:block}
     <div class="wrap">
       <div><b>11:00–15:00</b><span>ランチ</span></div>
       <div><b>17:00–20:00</b><span>ディナー</span></div>
-      <div><b>月・第3火</b><span>定休日 <a href="calendar.html" target="_blank" rel="noopener">カレンダー</a></span></div>
+      <div><b>月・第3火</b><span>定休日</span></div>
       <div><b>P 25台</b><span>大型バスも駐車できます</span></div>
     </div>
   </div>
