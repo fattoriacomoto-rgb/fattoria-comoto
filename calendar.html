@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>営業日カレンダー｜Fattoria CoMoTo</title>
+<meta name="description" content="ファットリアこもとの営業日カレンダー。定休日は毎週月曜日と第3火曜日（祝日の場合は翌日）、年末年始は12月31日〜1月2日がお休みです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;1,200;1,300;1,400&family=M+PLUS+2:wght@400;500;700&display=swap">
+<style>
+/* Layout: トップページと同じ色・書体。月ごとの7列カレンダーを並べ、休業日はトマト色で塗る */
+:root{
+  --bg:#ffffff; --tint:#f3f6f1; --fg:#1f2421; --muted:#636b66; --line:#e2e7e2;
+  --tomato:#c8372a; --basil:#2f6d36; --yolk:#e9b632; --on-accent:#ffffff;
+  --sun:#c8372a; --sat:#2f5f9e;
+  --f-logo:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --f-body:"M PLUS 2","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141715; --tint:#1c211e; --fg:#eef1ee; --muted:#a3aca6; --line:#2d3430;
+  --tomato:#ef6b5c; --basil:#7fc488; --yolk:#f0c859; --on-accent:#141715;
+  --sun:#ef8a7e; --sat:#8fb4e8; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141715; --tint:#1c211e; --fg:#eef1ee; --muted:#a3aca6; --line:#2d3430;
+  --tomato:#ef6b5c; --basil:#7fc488; --yolk:#f0c859; --on-accent:#141715;
+  --sun:#ef8a7e; --sat:#8fb4e8; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.85;margin:0}
+a{color:var(--tomato)}
+a:focus-visible{outline:2px solid var(--tomato);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+h1,h2{text-wrap:balance;margin:0;line-height:1.4}
+.kicker{font-family:var(--f-logo);font-style:italic;font-weight:400;color:var(--tomato);letter-spacing:.04em;font-size:1rem;margin:0}
+
+header{padding-block:16px}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+header .logo{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size:1.5rem;text-decoration:none;color:var(--fg)}
+
+.page-head{padding-block:clamp(24px,4vw,48px) 20px;border-bottom:1px solid var(--line)}
+.page-head h1{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:700;margin:.15em 0 .5em}
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 24px;margin:0 0 18px;padding:0;list-style:none}
+.rules li{min-width:0;font-size:.92rem;line-height:1.6}
+.rules b{display:block;font-weight:700;color:var(--fg)}
+.rules span{color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.84rem;color:var(--muted);margin:0}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.sw{width:18px;height:18px;border-radius:3px;display:inline-block;border:1px solid var(--line);background:var(--bg)}
+.sw.closed{background:var(--tomato);border-color:var(--tomato)}
+.sw.hol{background:var(--bg);border-color:var(--line);position:relative}
+.sw.hol::after{content:"";position:absolute;left:3px;right:3px;bottom:2px;height:2px;background:var(--yolk)}
+
+.months{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 32px;padding-block:32px 8px}
+.month{min-width:0}
+.month h2{font-family:var(--f-logo);font-weight:500;font-size:1.05rem;letter-spacing:.04em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:10px;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.month h2 small{font-family:var(--f-body);font-size:.78rem;color:var(--muted);font-weight:400;letter-spacing:0}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center;font-variant-numeric:tabular-nums}
+.dow{font-size:.72rem;color:var(--muted);padding-bottom:2px}
+.dow.su{color:var(--sun)}.dow.sa{color:var(--sat)}
+.d{position:relative;aspect-ratio:1/1;max-width:100%;display:flex;align-items:center;justify-content:center;font-family:var(--f-logo);font-weight:500;font-size:.92rem;border-radius:3px;color:var(--fg)}
+.d.su,.d.hol{color:var(--sun)}
+.d.sa{color:var(--sat)}
+.d.hol::after{content:"";position:absolute;left:28%;right:28%;bottom:12%;height:2px;border-radius:1px;background:var(--yolk)}
+.d.closed{background:var(--tomato);color:var(--on-accent)}
+.d.past{opacity:.35}
+.d.today{box-shadow:inset 0 0 0 2px var(--fg)}
+.d.closed.today{box-shadow:inset 0 0 0 2px var(--on-accent),0 0 0 2px var(--tomato)}
+.notes{list-style:none;margin:10px 0 0;padding:0;font-size:.8rem;line-height:1.6;color:var(--muted)}
+.notes li{display:grid;grid-template-columns:4.6em minmax(0,1fr);gap:6px;padding-block:2px}
+.notes time{font-variant-numeric:tabular-nums;color:var(--fg)}
+.notes .c{color:var(--tomato);font-weight:500}
+
+.foot-note{padding-block:24px 8px;font-size:.86rem;color:var(--muted)}
+.foot-note p{margin:0 0 .4em}
+.back{padding-block:16px 8px}
+.back a{display:inline-block;padding:10px 22px;border-radius:999px;background:var(--fg);color:var(--bg);text-decoration:none;font-size:.9rem}
+footer{padding-block:28px;text-align:center;font-size:.8rem;color:var(--muted)}
+footer .it{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size:1.1rem;color:var(--fg);display:block}
+
+@media (max-width:900px){.months{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){
+  .months{grid-template-columns:minmax(0,1fr)}
+  .rules{grid-template-columns:minmax(0,1fr)}
+  .month{max-width:420px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">Fattoria CoMoTo</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap page-head">
+    <p class="kicker">Calendar</p>
+    <h1>営業日カレンダー</h1>
+    <ul class="rules">
+      <li><b>定休日：毎週月曜日・第3火曜日</b><span>営業時間 11:00〜15:00／17:00〜20:00</span></li>
+      <li><b>定休日が祝日のときは翌日がお休み</b><span>祝日は営業します</span></li>
+      <li><b>年末年始：12月31日〜1月2日</b><span>お休みをいただきます</span></li>
+    </ul>
+    <p class="legend" aria-hidden="true">
+      <span><i class="sw closed"></i>お休み</span>
+      <span><i class="sw"></i>営業日</span>
+      <span><i class="sw hol"></i>祝日（営業）</span>
+    </p>
+  </div>
+
+  <div class="wrap months" id="months">
+    <noscript><p>カレンダーの表示にはJavaScriptが必要です。定休日は毎週月曜日と第3火曜日（祝日の場合は翌日）、年末年始は12月31日〜1月2日です。</p></noscript>
+  </div>
+
+  <div class="wrap foot-note">
+    <p>臨時休業や営業時間の変更は、トップページのお知らせとInstagramでもお知らせします。</p>
+    <p>ご予約・お問い合わせ：<a href="tel:0242831101">0242-83-1101</a></p>
+  </div>
+  <div class="wrap back"><a href="index.html">トップページへ</a></div>
+</main>
+
+<footer><span class="it">Fattoria CoMoTo</span>株式会社ファットリアこもと</footer>
+
+<script>
+/* ===== 設定（更新するときはここだけ直します） =====
+   FROM / TO      : 表示する期間（年-月）
+   HOLIDAYS       : 国民の祝日・休日（内閣府の一覧より）
+   EXTRA_CLOSED   : 臨時休業日   例 "2027-02-10":"臨時休業"
+   EXTRA_OPEN     : 定休日だけど営業する日  例 "2027-01-04":"臨時営業"
+*/
+var FROM = "2026-10", TO = "2027-03";
+var HOLIDAYS = {
+  "2026-10-12":"スポーツの日",
+  "2026-11-03":"文化の日",
+  "2026-11-23":"勤労感謝の日",
+  "2027-01-01":"元日",
+  "2027-01-11":"成人の日",
+  "2027-02-11":"建国記念の日",
+  "2027-02-23":"天皇誕生日",
+  "2027-03-21":"春分の日",
+  "2027-03-22":"振替休日"
+};
+var EXTRA_CLOSED = {};
+var EXTRA_OPEN = {};
+/* ===== 設定ここまで ===== */
+
+(function(){
+  var WD = ["日","月","火","水","木","金","土"];
+  function key(d){ return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2); }
+  function addDays(d,n){ var x=new Date(d); x.setDate(x.getDate()+n); return x; }
+
+  // 1. 休業日の一覧を作る
+  var closed = {};
+  function mark(d, why){ var k=key(d); if(!closed[k]) closed[k]=why; }
+  var y0=+FROM.slice(0,4), m0=+FROM.slice(5)-1, y1=+TO.slice(0,4), m1=+TO.slice(5)-1;
+  var start=new Date(y0,m0,1), end=new Date(y1,m1+1,0);
+  for(var d=new Date(start); d<=end; d=addDays(d,1)){
+    var wd=d.getDay(), regular=null;
+    if(wd===1) regular="定休日";
+    if(wd===2 && Math.ceil(d.getDate()/7)===3) regular="定休日（第3火曜）";
+    if(regular){
+      if(HOLIDAYS[key(d)]) mark(addDays(d,1), "定休日（"+(d.getMonth()+1)+"/"+d.getDate()+"の祝日の振替）");
+      else mark(d, regular);
+    }
+    var md=(d.getMonth()+1)*100+d.getDate();
+    if(md===1231 || md===101 || md===102) closed[key(d)]="年末年始休業";
+  }
+  Object.keys(EXTRA_CLOSED).forEach(function(k){ closed[k]=EXTRA_CLOSED[k]; });
+  Object.keys(EXTRA_OPEN).forEach(function(k){ delete closed[k]; });
+
+  // 2. 描く（今月より前の月は出さない）
+  var now=new Date(), todayKey=key(now), thisMonth=new Date(now.getFullYear(),now.getMonth(),1);
+  var box=document.getElementById("months"), html="";
+  for(var m=new Date(y0,m0,1); m<=end; m=new Date(m.getFullYear(),m.getMonth()+1,1)){
+    if(m<thisMonth) continue;
+    var y=m.getFullYear(), mo=m.getMonth(), last=new Date(y,mo+1,0).getDate();
+    var cells="", notes="", count=0;
+    WD.forEach(function(w,i){ cells+='<div class="dow'+(i===0?' su':i===6?' sa':'')+'" aria-hidden="true">'+w+'</div>'; });
+    for(var b=0;b<m.getDay();b++) cells+='<div aria-hidden="true"></div>';
+    for(var day=1; day<=last; day++){
+      var dt=new Date(y,mo,day), k=key(dt), w=dt.getDay(), cls="d";
+      if(w===0) cls+=" su"; if(w===6) cls+=" sa";
+      if(HOLIDAYS[k]) cls+=" hol";
+      if(closed[k]){ cls+=" closed"; count++; }
+      if(k<todayKey) cls+=" past";
+      if(k===todayKey) cls+=" today";
+      var label=(mo+1)+"月"+day+"日（"+WD[w]+"）"+(HOLIDAYS[k]?" "+HOLIDAYS[k]:"")+(closed[k]?" お休み":" 営業");
+      cells+='<div class="'+cls+'" title="'+label+'" aria-label="'+label+'">'+day+'</div>';
+      // 月曜の定休日以外（第3火曜・振替・年末年始・祝日の営業）は下に一言添える
+      var txt="";
+      if(closed[k] && closed[k]!=="定休日") txt='<span class="c">お休み</span> '+closed[k]+(HOLIDAYS[k]?"・"+HOLIDAYS[k]:"");
+      else if(!closed[k] && HOLIDAYS[k]) txt=HOLIDAYS[k]+"・営業します";
+      if(txt) notes+='<li><time>'+(mo+1)+'/'+day+'（'+WD[w]+'）</time><span>'+txt+'</span></li>';
+    }
+    html+='<section class="month" aria-label="'+y+'年'+(mo+1)+'月"><h2>'+y+'.'+("0"+(mo+1)).slice(-2)+'<small>'+(mo+1)+'月・お休み'+count+'日</small></h2>'
+        +'<div class="grid">'+cells+'</div>'+(notes?'<ul class="notes">'+notes+'</ul>':'')+'</section>';
+  }
+  box.innerHTML = html || '<p>表示できる期間が終わりました。最新の営業日はお電話でお問い合わせください。</p>';
+})();
+</script>
+
+</body>
+</html>
