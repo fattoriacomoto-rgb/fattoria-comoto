@@ -90,6 +90,21 @@ footer .it{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size
   .rules{grid-template-columns:minmax(0,1fr)}
   .month{max-width:420px}
 }
+/* ページ切り替えタブ（トップページと共通） */
+header nav{display:flex;gap:0 18px;flex-wrap:wrap;font-size:.88rem;line-height:1.9}
+header nav a{color:var(--fg);text-decoration:none}
+header nav a:hover{color:var(--tomato)}
+.head-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;min-width:0}
+.page-tabs{display:flex;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;background:var(--tint);line-height:1.85}
+.page-tabs a{display:block;padding:5px 16px;border-radius:999px;font-size:.86rem;font-weight:500;color:var(--fg);text-decoration:none;white-space:nowrap}
+.page-tabs a:hover{background:var(--bg);color:var(--tomato)}
+.page-tabs a[aria-current="page"]{background:var(--bg);color:var(--tomato);box-shadow:0 0 0 1px var(--line)}
+.page-tabs a.cal{background:var(--tomato);color:var(--bg);box-shadow:none}
+.page-tabs a.cal:hover{background:var(--fg);color:var(--bg)}
+@media (max-width:760px){
+  .head-right{align-items:stretch;width:100%}
+  .page-tabs a{flex:1;text-align:center;padding-inline:8px}
+}
 </style>
 </head>
 <body>
@@ -97,6 +112,10 @@ footer .it{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size
 <header>
   <div class="wrap">
     <a class="logo" href="index.html">Fattoria CoMoTo</a>
+    <div class="head-right">
+      <nav class="page-tabs" aria-label="ページ"><a href="news.html">お知らせ一覧</a><a href="menu.html">メニュー</a><a class="cal" aria-current="page" href="calendar.html">営業日カレンダー</a></nav>
+      <nav aria-label="サイト内"><a href="index.html#news">お知らせ</a><a href="index.html#about">こもとについて</a><a href="index.html#visit">アクセス</a><a href="index.html#contact">お問い合わせ</a><a href="https://www.instagram.com/fattoria.comoto" target="_blank" rel="noopener">Instagram</a></nav>
+    </div>
   </div>
 </header>
 
