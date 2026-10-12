@@ -13,18 +13,18 @@
 :root{
   --bg:#ffffff; --tint:#f3f6f1; --fg:#1f2421; --muted:#636b66; --line:#e2e7e2;
   --tomato:#c8372a; --basil:#2f6d36; --yolk:#e9b632; --on-accent:#ffffff;
-  --sun:#c8372a; --sat:#2f5f9e;
+  --sun:#c8372a; --sat:#2f5f9e; --grid:#c4cdc6;
   --f-logo:"Montserrat","Helvetica Neue",Arial,sans-serif;
   --f-body:"M PLUS 2","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#141715; --tint:#1c211e; --fg:#eef1ee; --muted:#a3aca6; --line:#2d3430;
   --tomato:#ef6b5c; --basil:#7fc488; --yolk:#f0c859; --on-accent:#141715;
-  --sun:#ef8a7e; --sat:#8fb4e8; color-scheme:dark}}
+  --sun:#ef8a7e; --sat:#8fb4e8; --grid:#47514b; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#141715; --tint:#1c211e; --fg:#eef1ee; --muted:#a3aca6; --line:#2d3430;
   --tomato:#ef6b5c; --basil:#7fc488; --yolk:#f0c859; --on-accent:#141715;
-  --sun:#ef8a7e; --sat:#8fb4e8; color-scheme:dark}
+  --sun:#ef8a7e; --sat:#8fb4e8; --grid:#47514b; color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.85;margin:0}
@@ -55,10 +55,12 @@ header .logo{font-family:var(--f-logo);font-style:italic;font-weight:300;font-si
 .month{min-width:0}
 .month h2{font-family:var(--f-logo);font-weight:500;font-size:1.05rem;letter-spacing:.04em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:10px;padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:8px}
 .month h2 small{font-family:var(--f-body);font-size:.78rem;color:var(--muted);font-weight:400;letter-spacing:0}
-.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center;font-variant-numeric:tabular-nums}
-.dow{font-size:.72rem;color:var(--muted);padding-bottom:2px}
+.grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:0;text-align:center;font-variant-numeric:tabular-nums;border-top:1px solid var(--grid);border-left:1px solid var(--grid)}
+.grid>div{border-right:1px solid var(--grid);border-bottom:1px solid var(--grid);min-width:0}
+.dow{font-size:.72rem;font-weight:500;color:var(--muted);padding-block:3px;background:var(--tint)}
 .dow.su{color:var(--sun)}.dow.sa{color:var(--sat)}
-.d{position:relative;aspect-ratio:1/1;max-width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-family:var(--f-logo);font-weight:500;font-size:.92rem;border-radius:3px;color:var(--fg)}
+.d{position:relative;aspect-ratio:1/1;max-width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-family:var(--f-logo);font-weight:500;font-size:.92rem;color:var(--fg)}
+.e{background:var(--tint)}
 .d.su,.d.hol{color:var(--sun)}
 .d.sa{color:var(--sat)}
 .d.hol::after{content:"";position:absolute;left:28%;right:28%;bottom:12%;height:2px;border-radius:1px;background:var(--yolk)}
@@ -69,11 +71,13 @@ header .logo{font-family:var(--f-logo);font-style:italic;font-weight:300;font-si
 .d.special{background:var(--basil);color:var(--on-accent)}
 .notes .o{color:var(--basil);font-weight:500}
 .sw.special{background:var(--basil);border-color:var(--basil)}
-.d.past{opacity:.35}
+.d.past,.d.past.su,.d.past.sa,.d.past.hol{color:color-mix(in srgb,var(--fg) 30%,var(--bg))}
+.d.past.closed,.d.past.special{background:color-mix(in srgb,var(--tomato) 35%,var(--bg));color:var(--bg)}
+.d.past.special{background:color-mix(in srgb,var(--basil) 35%,var(--bg))}
 .d.today{box-shadow:inset 0 0 0 2px var(--fg)}
 .d.closed.today{box-shadow:inset 0 0 0 2px var(--on-accent),0 0 0 2px var(--tomato)}
 .notes{list-style:none;margin:10px 0 0;padding:0;font-size:.8rem;line-height:1.6;color:var(--muted)}
-.notes li{display:grid;grid-template-columns:4.6em minmax(0,1fr);gap:6px;padding-block:2px}
+.notes li{display:grid;grid-template-columns:6.4em minmax(0,1fr);gap:6px;padding-block:2px}
 .notes time{font-variant-numeric:tabular-nums;color:var(--fg)}
 .notes .c{color:var(--tomato);font-weight:500}
 
@@ -209,7 +213,7 @@ var EXTRA_OPEN = {
     var y=m.getFullYear(), mo=m.getMonth(), last=new Date(y,mo+1,0).getDate();
     var cells="", notes="", count=0;
     WD.forEach(function(w,i){ cells+='<div class="dow'+(i===0?' su':i===6?' sa':'')+'" aria-hidden="true">'+w+'</div>'; });
-    for(var b=0;b<m.getDay();b++) cells+='<div aria-hidden="true"></div>';
+    for(var b=0;b<m.getDay();b++) cells+='<div class="e" aria-hidden="true"></div>';
     for(var day=1; day<=last; day++){
       var dt=new Date(y,mo,day), k=key(dt), w=dt.getDay(), cls="d";
       if(w===0) cls+=" su"; if(w===6) cls+=" sa";
@@ -229,6 +233,7 @@ var EXTRA_OPEN = {
       else if(!closed[k] && HOLIDAYS[k]) txt=HOLIDAYS[k]+"・営業します";
       if(txt) notes+='<li><time>'+(mo+1)+'/'+day+'（'+WD[w]+'）</time><span>'+txt+'</span></li>';
     }
+    for(var t=(m.getDay()+last)%7; t>0 && t<7; t++) cells+='<div class="e" aria-hidden="true"></div>';
     html+='<section class="month" aria-label="'+y+'年'+(mo+1)+'月"><h2>'+y+'.'+("0"+(mo+1)).slice(-2)+'<small>'+(mo+1)+'月・お休み'+count+'日</small></h2>'
         +'<div class="grid">'+cells+'</div>'+(notes?'<ul class="notes">'+notes+'</ul>':'')+'</section>';
   }

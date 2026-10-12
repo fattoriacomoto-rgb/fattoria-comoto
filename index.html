@@ -66,7 +66,7 @@ header nav a:hover{color:var(--tomato)}
 .story-slides{aspect-ratio:4/3}
 
 .ribbon{background:var(--tint);border-block:1px solid var(--line)}
-.ribbon .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding-block:24px}
+.ribbon .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding-block:24px}
 .ribbon b{display:block;font-family:var(--f-logo);font-weight:600;font-size:1.35rem;color:var(--basil);font-variant-numeric:tabular-nums}
 .ribbon span{font-size:.85rem;color:var(--muted)}
 
@@ -162,6 +162,7 @@ footer .it{font-size:1.1rem;color:var(--fg);display:block}
 @media (max-width:760px){
   .hero,.story,.visit .grid{grid-template-columns:minmax(0,1fr)}
   .ribbon .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ribbon .wrap>div:last-child{grid-column:1/-1}
   .intro,.facts,.news-grid{grid-template-columns:minmax(0,1fr)}
   .teaser-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .news-list li{grid-template-columns:auto auto;}
@@ -211,7 +212,6 @@ footer .it{font-size:1.1rem;color:var(--fg);display:block}
     <div class="wrap">
       <div><b>11:00–15:00</b><span>ランチ</span></div>
       <div><b>17:00–20:00</b><span>ディナー</span></div>
-      <div><b>月・第3火</b><span>定休日</span></div>
       <div><b>P 25台</b><span>大型バスも駐車できます</span></div>
     </div>
   </div>
