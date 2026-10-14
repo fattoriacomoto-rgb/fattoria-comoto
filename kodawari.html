@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>こもとのこだわり｜Fattoria CoMoTo</title>
+<meta name="description" content="ファットリアこもとのこだわり。有機栽培、地粉、珈琲・紅茶、自家生産・地元素材、蕎麦、お酒について。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;1,200;1,300;1,400&family=M+PLUS+2:wght@400;500;700&display=swap">
+<style>
+/* Layout: トップページ（案3）と同じトークン。カテゴリ見出し＋写真帯＋価格表の献立 */
+:root{
+  --bg:#ffffff; --tint:#f3f6f1; --fg:#1f2421; --muted:#636b66; --line:#e2e7e2;
+  --tomato:#c8372a; --basil:#2f6d36; --yolk:#e9b632;
+  --f-logo:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --f-body:"M PLUS 2","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#141715; --tint:#1c211e; --fg:#eef1ee; --muted:#a3aca6; --line:#2d3430;
+  --tomato:#ef6b5c; --basil:#7fc488; --yolk:#f0c859; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141715; --tint:#1c211e; --fg:#eef1ee; --muted:#a3aca6; --line:#2d3430;
+  --tomato:#ef6b5c; --basil:#7fc488; --yolk:#f0c859; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.8;margin:0}
+img{max-width:100%}
+a{color:var(--tomato)}
+a:focus-visible{outline:2px solid var(--tomato);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.4}
+.kicker{font-family:var(--f-logo);font-style:italic;font-weight:400;color:var(--tomato);letter-spacing:.04em;margin:0}
+
+header{padding-block:16px}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{font-family:var(--f-logo);font-style:italic;font-weight:300;font-size:1.5rem;text-decoration:none;color:var(--fg)}
+header nav{display:flex;gap:18px;flex-wrap:wrap;font-size:.88rem}
+header nav a{color:var(--fg);text-decoration:none}
+header nav a[aria-current]{color:var(--tomato)}
+
+.title{padding-block:24px 8px}
+.title h1{font-family:var(--f-logo);font-style:italic;font-weight:200;font-size:clamp(2.6rem,7vw,4.4rem);line-height:1}
+.title p{margin:.6em 0 0;color:var(--muted);font-size:.92rem;max-width:44em}
+
+
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.toc a{font-size:.85rem;padding:5px 14px;border:1px solid var(--line);border-radius:999px;color:var(--fg);text-decoration:none}
+.toc a:hover{border-color:var(--fg)}
+section{padding-block:44px;border-bottom:1px solid var(--line)}
+.k-sec{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(20px,4vw,48px);align-items:start}
+.k-text h2{font-size:clamp(1.3rem,2.6vw,1.7rem);margin-bottom:.7em;padding-left:12px;border-left:4px solid var(--basil)}
+.k-text p{margin:0 0 1em;max-width:40em}
+.photos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.photos:not(:has(figure)){display:none}
+.k-sec:has(.photos:not(:has(figure))){grid-template-columns:minmax(0,1fr)}
+.photos figure{margin:0}
+.photos figure:only-child{grid-column:1/-1}
+.photos img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:2px;background:var(--tint)}
+.photos figcaption{font-size:.78rem;color:var(--muted);margin-top:4px;line-height:1.4}
+.facts{margin:0 0 1em;border-top:1px solid var(--line)}
+.facts div{display:grid;grid-template-columns:4.5em minmax(0,1fr);gap:12px;padding:8px 0;border-bottom:1px solid var(--line)}
+.facts dt{font-weight:700;color:var(--basil)}
+.facts dd{margin:0}
+.closing{padding-block:44px;text-align:center;font-size:1.05rem}
+.foot{padding-block:40px;text-align:center;font-size:.85rem;color:var(--muted)}
+.back{display:inline-block;margin-bottom:16px;padding:10px 22px;border-radius:999px;background:var(--fg);color:var(--bg);text-decoration:none}
+@media (max-width:760px){.k-sec{grid-template-columns:minmax(0,1fr)}}
+/* ヘッダーのメニュー（横一列） */
+.topnav{display:flex;flex-wrap:nowrap;align-items:center;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--tint);max-width:100%;overflow-x:auto;scrollbar-width:none;line-height:1.85}
+.topnav::-webkit-scrollbar{display:none}
+.topnav a{flex:0 0 auto;display:block;padding:5px 14px;border-radius:999px;font-size:.86rem;font-weight:500;color:var(--fg);text-decoration:none;white-space:nowrap}
+.topnav a:hover{background:var(--bg);color:var(--tomato)}
+.topnav a[aria-current="page"]{background:var(--bg);color:var(--tomato);box-shadow:0 0 0 1px var(--line)}
+.topnav a.cal{background:var(--tomato);color:var(--bg);box-shadow:none}
+.topnav a.cal:hover{background:var(--fg);color:var(--bg)}
+@media (max-width:760px){
+  header .wrap{flex-direction:column;align-items:stretch;gap:10px}
+  .topnav{border-radius:12px}
+  .topnav a{padding-inline:11px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html">Fattoria CoMoTo</a>
+    <nav class="topnav" aria-label="サイト内"><a href="news.html">お知らせ一覧</a><a href="menu.html">メニュー</a><a class="cal" target="_blank" rel="noopener" href="calendar.html">営業日カレンダー</a><a href="index.html#about">こもとについて</a><a aria-current="page" href="kodawari.html">こだわり</a><a href="index.html#visit">アクセス</a><a href="index.html#contact">お問い合わせ</a><a target="_blank" rel="noopener" href="https://www.instagram.com/fattoria.comoto">Instagram</a></nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap title">
+    <p class="kicker">Our Commitment</p>
+    <h1>こもとのこだわり</h1>
+    <p>「こもと」は「地元素材のお料理を食べていただきたい」という思いから、平成28年5月にオープンした農家レストランです。自家生産の野菜やお米、目の前の畑で育てられる蕎麦や小麦「ゆきちから」を中心に、素材を活かしたお料理を提供しております。</p>
+    <nav class="toc" aria-label="こだわりの目次"><a href="#organic">有機</a><a href="#jiko">地粉</a><a href="#coffee">珈琲・紅茶</a><a href="#local">自家生産・地元素材</a><a href="#soba">蕎麦</a><a href="#drinks">お酒・飲料</a></nav>
+  </div>
+
+  <section id="organic">
+    <div class="wrap k-sec">
+      <div class="k-text">
+        <h2>有機へのこだわり</h2>
+        <p>私たちが農業を始めたのは平成3年。当初から自給自足的な生活に憧れ、「何でも自分たちで作ってみよう」という思いが出発点でした。お米から始め、野菜や養鶏へと広がり、現在では以下のような取り組みを行っています。</p>
+        <dl class="facts">
+          <div><dt>水田</dt><dd>11ヘクタール（うち4ヘクタールは紙マルチ）</dd></div>
+          <div><dt>畑</dt><dd>110アール（有機肥料100％、農薬不使用）</dd></div>
+          <div><dt>養鶏</dt><dd>約300羽。自家栽培の飼料米で「コーンフリー」を実現</dd></div>
+        </dl>
+        <p>お米を食べた鶏の卵は黄身が淡いレモン色になり、自家製プリンなどに独特の色合いをもたらしています。</p>
+      </div>
+      <!-- 写真：images/kodawari/ に入れて、下の photos の中に <figure> を1行ずつ追加します（写真が無いと枠ごと表示されません） -->
+      <div class="photos">
+        <figure><img src="images/farm-vegetable.jpg" alt="店の前の野菜畑" loading="lazy"><figcaption>野菜畑</figcaption></figure>
+        <figure><img src="images/farm-rice.jpg" alt="実りの秋の田んぼ" loading="lazy"><figcaption>田んぼ</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <section id="jiko">
+    <div class="wrap k-sec">
+      <div class="k-text">
+        <h2>地粉へのこだわり</h2>
+        <p>坂本地区に広がる畑地では、蕎麦と小麦が二毛作で栽培されています。当店では、この地蕎麦と地小麦から取れる地粉を使用し、こだわりのメニューを提供しています。</p>
+      </div>
+      <!-- 写真：images/kodawari/ に入れて、下の photos の中に <figure> を1行ずつ追加します（写真が無いと枠ごと表示されません） -->
+      <div class="photos">
+        <figure><img src="images/farm-soba.jpg" alt="白い花が咲く蕎麦畑" loading="lazy"><figcaption>蕎麦畑</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <section id="coffee">
+    <div class="wrap k-sec">
+      <div class="k-text">
+        <h2>珈琲・紅茶へのこだわり</h2>
+        <p>当店で提供している珈琲は、大阪の「田代珈琲」が生産地の農家から直接輸入しているスペシャルティコーヒーと呼ばれる珈琲豆を使用しています。農家でもある私どもと、本来農作物である珈琲を農家から直輸入する田代珈琲のオーナー、田代氏との価値観の一致で、当店では同社の珈琲を使用することといたしました。</p>
+        <p>また紅茶は、仙台の紅茶の輸入元である「ガネッシュ」がインドからシーズン毎に輸入している「新茶の紅茶」と呼ばれる茶葉を使用しております。私どもがガネッシュの紅茶を扱い始めて早いもので29年になりますが、いつも変わらない品質の茶葉を届けてくださる同社のこだわりの紅茶を、是非皆様にも味わって頂きたく思います。</p>
+        <p>珈琲・紅茶を淹れる水は、造り酒屋をしていた我が家の深井戸（地下65m）からくみ上げた地下水を使用しております。</p>
+        <p>またコーヒー・紅茶の相方として使用するミルクは、地元が誇る牛乳「べこの乳」を使用しております。もちろんミルクティー、ラテにも100％この牛乳を使用しております。</p>
+      </div>
+      <!-- 写真：images/kodawari/ に入れて、下の photos の中に <figure> を1行ずつ追加します（写真が無いと枠ごと表示されません） -->
+      <div class="photos">
+        <figure><img src="images/news/202608-roast.jpg" alt="お店の焙煎機と、焙煎したコーヒー豆の袋" loading="lazy"><figcaption>自家焙煎</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <section id="local">
+    <div class="wrap k-sec">
+      <div class="k-text">
+        <h2>自家生産・地元素材・食材へのこだわり</h2>
+        <p>当店で使用する素材は、可能な限り自家生産の有機農産物や地元の素材を取り入れています。調味料や食肉など地元調達が難しいものについては、納得のいく食材を選ぶよう心がけています。</p>
+      </div>
+      <!-- 写真：images/kodawari/ に入れて、下の photos の中に <figure> を1行ずつ追加します（写真が無いと枠ごと表示されません） -->
+      <div class="photos">
+
+      </div>
+    </div>
+  </section>
+  <section id="soba">
+    <div class="wrap k-sec">
+      <div class="k-text">
+        <h2>蕎麦へのこだわり</h2>
+        <p>当店のお蕎麦は、地元産の蕎麦粉を100％使用し、手打ちにこだわっています。蕎麦は地元の蕎麦打ち名人が地蕎麦を自家製粉し、蕎麦の中心部分から取れる極上の粉（全体のわずか5割）だけを使っています。この粉を使った蕎麦は、つなぎを一切使わずに打ち上げられた特別なものです。</p>
+        <p>少し前まで、このような蕎麦を食べるには、蕎麦打ち名人と知り合いになるしか方法がなく、「お金では買えない蕎麦」として「幻の蕎麦」とも呼ばれていました。私たち自身も、仲間内で「幻の蕎麦会」と名付けた集まりを開き、その蕎麦を楽しんでいました。「この特別な蕎麦を、ぜひお客様にも提供したい！」という思いが、このお店を始める出発点でした。</p>
+        <p>当店で提供する蕎麦のたれは、かつて私たちが営んでいたそば屋「みやま茶屋」の伝統を受け継いだものです。「みやま茶屋」は46年前に創業しましたが、震災の年の4月、火事により残念ながら閉店しました。</p>
+        <p>お蕎麦のたれは、その「みやま茶屋」創業当時から続いたかえしを仕込んで、カツオ節と煮干し、昆布でだしをとり、三種類の醤油をつかった伝統の作り方で仕込んだ「蕎麦たれ」です。このたれは薄口ではなく、濃厚で深い味わいが特徴です。私たちは、この伝統の味を守りながら、多くのお客様にお届けしたいと願っています。</p>
+      </div>
+      <!-- 写真：images/kodawari/ に入れて、下の photos の中に <figure> を1行ずつ追加します（写真が無いと枠ごと表示されません） -->
+      <div class="photos">
+        <figure><img src="images/soba-zaru.jpg" alt="高寺芯そばのざる蕎麦" loading="lazy"><figcaption>高寺芯そば</figcaption></figure>
+      </div>
+    </div>
+  </section>
+  <section id="drinks">
+    <div class="wrap k-sec">
+      <div class="k-text">
+        <h2>お酒・飲料へのこだわり</h2>
+        <p>店主はもともと酒蔵に関わり、過去には利き酒師やビアマスターイバリュエーターの資格を有していました。お酒の強さには自信はありませんが、美味しいお酒を提供することにこだわりを持っています。</p>
+      </div>
+      <!-- 写真：images/kodawari/ に入れて、下の photos の中に <figure> を1行ずつ追加します（写真が無いと枠ごと表示されません） -->
+      <div class="photos">
+
+      </div>
+    </div>
+  </section>
+
+  <p class="wrap closing">どうぞ、私たちのこだわりが詰まったお料理とお飲み物をお楽しみください。</p>
+</main>
+<div class="foot">
+  <a class="back" href="index.html">トップページへ戻る</a><br>
+  株式会社ファットリアこもと　〒969-6586 福島県河沼郡会津坂下町坂本糠塚乙1144　TEL <a href="tel:0242831101">0242-83-1101</a><br><a href="mailto:fattoria.comoto@gmail.com">fattoria.comoto@gmail.com</a>
+</div>
+</body>
+</html>
