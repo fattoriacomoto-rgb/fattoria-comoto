@@ -145,6 +145,10 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
 /* ラベル：色分けをやめ、細い枠の文字だけに。期間限定だけ朱色 */
 .tag,.badge,.pop{background:none!important;border:1px solid currentColor!important;color:var(--muted)!important;font-weight:500!important}
 .tag-limited,.badge,.pop{color:var(--tomato)!important}
+
+/* ラベルは押すとお知らせ一覧をその種類で絞り込むボタン */
+a.tag{text-decoration:none;min-height:28px;display:inline-flex!important;align-items:center;padding:2px 10px!important;border-radius:4px}
+a.tag:hover{background:var(--fg)!important;color:var(--bg)!important;border-color:var(--fg)!important}
 </style>
 </head>
 <body>
@@ -187,7 +191,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img class="tall" src="images/news/20261114-napolitan.jpg" alt="りんごのナポリタン"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-11-14">2026.11.14</time><span class="tag tag-limited">期間限定</span></div>
+        <div class="meta"><time datetime="2026-11-14">2026.11.14</time><a class="tag tag-limited" href="#f-menu" title="メニューのお知らせだけを見る">期間限定</a></div>
         <h3>11月14日（土）より「りんごのナポリタン」始まります</h3>
         <p>シャキシャキ林檎のもちもちパスタのナポリタン。<br>大人気メニューが期間限定で復活します。</p>
         <a class="more" href="https://www.facebook.com/masayasu.igarashi/posts/pfbid02FJmrKmCXMGoGfk6XnPqVYmHEMYaApKKdyTTfNF8HYLwAvqJ16vdgF5zMckQKtwiil" target="_blank" rel="noopener">Facebookの投稿はこちら</a>
@@ -203,7 +207,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img class="wide" src="images/news/20261016-nikufes.jpg" alt="ヤマト豚のラグー丼と栗入り馬肉カレー"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-10-16">2026.10.16</time><span class="tag tag-event">イベント</span></div>
+        <div class="meta"><time datetime="2026-10-16">2026.10.16</time><a class="tag tag-event" href="#f-event" title="イベントのお知らせだけを見る">イベント</a></div>
         <h3>10月18日（日）会津坂下駅100周年イベント「肉フェス」に出店します</h3>
         <p>出店時間は11:00〜17:00です。<br>メニューは「栗入り馬肉カレー」と「ヤマト豚のラグー丼」。<br>なくなり次第終了となります。</p>
         <a class="more" href="https://gokujo-aizu.com/26572/" target="_blank" rel="noopener">イベントの詳細はこちら</a>
@@ -216,7 +220,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img src="images/news/20261014-sobabatake.jpg" alt="白い花が一面に咲くそば畑"><figcaption>そばの花が咲く畑</figcaption></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-10-14">2026.10.14</time><span class="tag tag-limited">新そば</span></div>
+        <div class="meta"><time datetime="2026-10-14">2026.10.14</time><a class="tag tag-limited" href="#f-menu" title="メニューのお知らせだけを見る">新そば</a></div>
         <h3>新そば提供始まりました</h3>
         <p>会津で一番早い新そばです。</p>
         <a class="more" href="menu.html#soba">高寺芯そばのメニューを見る</a>
@@ -228,7 +232,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img class="tall" src="images/news/20261008-craft.jpg" alt="講座で作った、流木や松ぼっくり、苔で飾った小さな家のクラフト"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-10-08">2026.10.08</time><span class="tag tag-event">まちゼミ</span></div>
+        <div class="meta"><time datetime="2026-10-08">2026.10.08</time><a class="tag tag-event" href="#f-event" title="イベントのお知らせだけを見る">まちゼミ</a></div>
         <h3>こもとのまちゼミ「暮らしを彩るクラフト講座」が開催されました</h3>
         <a class="more" href="https://www.bange-bonge.jp/matizemi/" target="_blank" rel="noopener">まちゼミの詳細はこちら</a><br>
         <a class="more" href="https://www.facebook.com/masayasu.igarashi" target="_blank" rel="noopener">こもとの裏方（Facebook）で講座の様子を見る</a>
@@ -240,7 +244,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img class="tall" src="images/news/20261006-garlic.jpg" alt="畑でニンニクを植え付ける様子"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-10-06">2026.10.06</time><span class="tag tag-info">農園</span></div>
+        <div class="meta"><time datetime="2026-10-06">2026.10.06</time><a class="tag tag-info" href="#f-farm" title="農園のお知らせだけを見る">農園</a></div>
         <h3>こもとのニンニクを定植しました</h3>
         <a class="more" href="https://www.facebook.com/masayasu.igarashi" target="_blank" rel="noopener">こもとの裏方（Facebook）で畑の様子を見る</a>
       </div>
@@ -251,7 +255,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img src="images/pizza-nasu.jpg" alt="季節限定 茄子の味噌ピザ"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-10-04">2026.10.04</time><span class="tag tag-limited">季節限定</span></div>
+        <div class="meta"><time datetime="2026-10-04">2026.10.04</time><a class="tag tag-limited" href="#f-menu" title="メニューのお知らせだけを見る">季節限定</a></div>
         <h3>季節限定 茄子の味噌ピザ 絶賛発売中</h3>
         <p>茄子と味噌を合わせた、この季節だけのピザです。</p>
         <a class="more" href="menu.html#pizza">ピッツァのメニューを見る</a>
@@ -260,7 +264,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
 
     <article class="entry no-photo" id="n20261003" data-cat="event">
       <div>
-        <div class="meta"><time datetime="2026-10-03">2026.10.03</time><span class="tag tag-event">イベント</span></div>
+        <div class="meta"><time datetime="2026-10-03">2026.10.03</time><a class="tag tag-event" href="#f-event" title="イベントのお知らせだけを見る">イベント</a></div>
         <h3>こもとの里山（玄ちゃんの森）で森のコンサートが開かれました</h3>
         <a class="more" href="https://www.instagram.com/p/DeBym6gE5T6/" target="_blank" rel="noopener">Instagramで当日の様子を見る</a>
       </div>
@@ -271,7 +275,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img class="tall natural" src="images/news/20261003-koshihikari.jpg" alt="令和八年産 特別栽培コシヒカリ 2kg袋"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-10-03">2026.10.03</time><span class="tag tag-rice">新米</span></div>
+        <div class="meta"><time datetime="2026-10-03">2026.10.03</time><a class="tag tag-rice" href="#f-rice" title="新米のお知らせだけを見る">新米</a></div>
         <h3>新米 特別栽培コシヒカリの販売を始めました</h3>
       </div>
     </article>
@@ -285,7 +289,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img class="tall" src="images/news/20260922-imo.jpg" alt="畑から掘り出したさつまいも" loading="lazy"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-09-22">2026.09.22</time><span class="tag tag-info">農園</span></div>
+        <div class="meta"><time datetime="2026-09-22">2026.09.22</time><a class="tag tag-info" href="#f-farm" title="農園のお知らせだけを見る">農園</a></div>
         <h3>さつまいもを収穫しました</h3>
         <p>現在キュアリング（熟成）中です。今年も「こもと芋のブリュレ」をお出しします。</p>
       </div>
@@ -293,7 +297,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
 
     <article class="entry no-photo" id="n20260905" data-cat="rice">
       <div>
-        <div class="meta"><time datetime="2026-09-05">2026.09.05</time><span class="tag tag-rice">新米</span></div>
+        <div class="meta"><time datetime="2026-09-05">2026.09.05</time><a class="tag tag-rice" href="#f-rice" title="新米のお知らせだけを見る">新米</a></div>
         <h3>新米「五百川」の販売を始めました</h3>
       </div>
     </article>
@@ -303,7 +307,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img class="wide" src="images/news/20260905-fes.jpg" alt="こもとフェスの出演者とスタッフの集合写真" loading="lazy"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-09-05">2026.09.05</time><span class="tag tag-event">イベント</span></div>
+        <div class="meta"><time datetime="2026-09-05">2026.09.05</time><a class="tag tag-event" href="#f-event" title="イベントのお知らせだけを見る">イベント</a></div>
         <h3>こもとフェスを開催しました</h3>
       </div>
     </article>
@@ -313,14 +317,14 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img class="tall" src="images/news/20260901-goat.jpg" alt="小屋の中に並ぶヤギの親子" loading="lazy"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-09-01">2026.09.01</time><span class="tag tag-info">農園</span></div>
+        <div class="meta"><time datetime="2026-09-01">2026.09.01</time><a class="tag tag-info" href="#f-farm" title="農園のお知らせだけを見る">農園</a></div>
         <h3>こもとのヤギにまた赤ちゃんが生まれました</h3>
       </div>
     </article>
 
     <article class="entry no-photo" id="n20260901-2" data-cat="event">
       <div>
-        <div class="meta"><time datetime="2026-09-01">2026.09.01</time><span class="tag tag-event">まちゼミ</span></div>
+        <div class="meta"><time datetime="2026-09-01">2026.09.01</time><a class="tag tag-event" href="#f-event" title="イベントのお知らせだけを見る">まちゼミ</a></div>
         <h3>会津坂下町商工会まちゼミで、こもとが主催する「世界を旅するコーヒー紀行」「暮らしを彩るクラフト講座」の募集が始まりました</h3>
         <a class="more" href="https://www.bange-bonge.jp/matizemi/" target="_blank" rel="noopener">まちゼミの詳細・お申し込みはこちら</a>
       </div>
@@ -335,7 +339,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img src="images/farm-rice.jpg" alt="稲刈り前の田んぼ" loading="lazy"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-08-29">2026.08.29</time><span class="tag tag-info">農園</span></div>
+        <div class="meta"><time datetime="2026-08-29">2026.08.29</time><a class="tag tag-info" href="#f-farm" title="農園のお知らせだけを見る">農園</a></div>
         <h3>令和8年の稲刈りが始まりました</h3>
       </div>
     </article>
@@ -345,7 +349,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img class="wide" src="images/news/20260801-lamb.jpg" alt="ラム肉のボロネーゼ。オクラ、黄色いズッキーニ、ミニトマト入り" loading="lazy"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-08-01">2026.08.01</time><span class="tag tag-new">新メニュー</span></div>
+        <div class="meta"><time datetime="2026-08-01">2026.08.01</time><a class="tag tag-new" href="#f-menu" title="メニューのお知らせだけを見る">新メニュー</a></div>
         <h3>ラム肉のボロネーゼの提供を始めました</h3>
         <a class="more" href="menu.html#pasta">パスタのメニューを見る</a>
       </div>
@@ -356,7 +360,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img class="tall" src="images/news/202608-roast.jpg" alt="お店の焙煎機と、焙煎したコーヒー豆の袋" loading="lazy"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-08">2026.08</time><span class="tag tag-new">カフェ</span></div>
+        <div class="meta"><time datetime="2026-08">2026.08</time><a class="tag tag-new" href="#f-menu" title="メニューのお知らせだけを見る">カフェ</a></div>
         <h3>自家焙煎コーヒーを始めました</h3>
         <p>スペシャルティコーヒーの生豆を、お店で焙煎しています。</p>
         <a class="more" href="menu.html#cafe">カフェメニューを見る</a>
@@ -372,7 +376,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <figure><img class="wide" src="images/news/202607-curry.jpg" alt="栗入り馬肉カレー" loading="lazy"></figure>
       </div>
       <div>
-        <div class="meta"><time datetime="2026-07">2026.07</time><span class="tag tag-new">新メニュー</span></div>
+        <div class="meta"><time datetime="2026-07">2026.07</time><a class="tag tag-new" href="#f-menu" title="メニューのお知らせだけを見る">新メニュー</a></div>
         <h3>栗入り馬肉カレーの提供を始めました</h3>
         <a class="more" href="menu.html#rice">ご飯もののメニューを見る</a>
       </div>
@@ -389,14 +393,21 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
   var btns=document.querySelectorAll('.filters button');
   var entries=document.querySelectorAll('.entry');
   var months=document.querySelectorAll('.month');
+  function apply(f){
+    btns.forEach(function(x){x.setAttribute('aria-pressed',x.dataset.f===f?'true':'false')});
+    entries.forEach(function(e){e.hidden=!(f==='all'||e.dataset.cat===f)});
+    months.forEach(function(m){m.hidden=!m.querySelector('.entry:not([hidden])')});
+  }
   btns.forEach(function(b){
-    b.addEventListener('click',function(){
-      var f=b.dataset.f;
-      btns.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
-      entries.forEach(function(e){e.hidden=!(f==='all'||e.dataset.cat===f)});
-      months.forEach(function(m){m.hidden=!m.querySelector('.entry:not([hidden])')});
-    });
+    b.addEventListener('click',function(){ apply(b.dataset.f); });
   });
+  // ラベル（#f-menu など）から来たときは、その種類で絞り込む
+  function fromHash(){
+    var m=location.hash.match(/^#f-(all|menu|rice|farm|event)$/);
+    if(m){ apply(m[1]); document.querySelector('.filters').scrollIntoView({block:'start'}); }
+  }
+  window.addEventListener('hashchange',fromHash);
+  fromHash();
 })();
 </script>
 </body>
