@@ -92,18 +92,46 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
 .logo{font-weight:500}
 .title h1{font-family:var(--f-head);font-style:normal;font-weight:700;font-size:clamp(1.8rem,4.2vw,2.6rem);line-height:1.3}
 .month h2,.meta time,.item .yen,.d{font-family:var(--f-head)}
+
+/* ===== デザイン整理（2026-11）：楕円のボタン・色分け・飾りをやめ、文字と写真で見せる ===== */
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:12px;top:8px;z-index:20;background:var(--bg);color:var(--fg);padding:8px 14px;outline:2px solid var(--tomato)}
+/* ヘッダーのメニュー：枠なしの文字メニュー。押しやすい高さ44px */
+.topnav{border:0;border-radius:0;background:none;padding:0;gap:0 2px}
+.topnav a{border-radius:0;padding:0 10px;min-height:44px;display:flex;align-items:center;font-weight:500;color:var(--fg);background:none;box-shadow:none}
+.topnav a:hover,.topnav a.cal:hover{background:none;color:var(--tomato)}
+.topnav a.cal{background:none;color:var(--fg)}
+.topnav a[aria-current="page"]{background:none;color:var(--fg);box-shadow:inset 0 -2px 0 var(--fg)}
+@media (max-width:760px){
+  .topnav{border-radius:0;border-block:1px solid var(--line);margin-inline:-20px;padding-inline:10px}
+  .topnav a{padding-inline:9px}
+}
+/* ボタン・目次：角を小さく、色は墨一色に */
+.btn-menu,.cta a,.mail-btn,.kodawari-link,.back,.back a,.btn-pdf{border-radius:4px!important;min-height:44px;display:inline-flex!important;align-items:center}
+.cta a,.tel-btn{background:var(--bg)!important;color:var(--fg)!important;border:1px solid var(--fg)!important}
+.cta a.go,.mail-btn:not(.tel-btn),.btn-pdf,.kodawari-link{background:var(--fg)!important;color:var(--bg)!important;border:1px solid var(--fg)!important}
+.cats a,.toc a,.filters button{border-radius:4px;min-height:40px;display:inline-flex;align-items:center}
+.names li{border-radius:4px}
+.btn-menu,.cta a,.mail-btn,.kodawari-link,.back a,.btn-pdf{text-decoration:none!important;padding:10px 22px}
+@media (max-width:760px){.topnav{max-width:none}}
+/* ラベル：色分けをやめ、細い枠の文字だけに。期間限定だけ朱色 */
+.tag,.badge,.pop{background:none!important;border:1px solid currentColor!important;color:var(--muted)!important;font-weight:500!important}
+.tag-limited,.badge,.pop{color:var(--tomato)!important}
+.k-text h2{border-left:0;padding-left:0}
+.title .motto{border-left:0;background:none;padding:0;font-family:var(--f-head);font-size:clamp(1.15rem,2.4vw,1.4rem);font-weight:500;line-height:1.8}
 </style>
 </head>
 <body>
+<a class="skip" href="#main">本文へ移動</a>
 
 <header>
   <div class="wrap">
     <a class="logo" href="index.html">Fattoria CoMoTo</a>
-    <nav class="topnav" aria-label="サイト内"><a href="news.html">お知らせ一覧</a><a href="menu.html">メニュー</a><a class="cal" target="_blank" rel="noopener" href="calendar.html">営業日カレンダー</a><a href="index.html#about">こもとについて</a><a aria-current="page" href="kodawari.html">こだわり</a><a href="index.html#visit">アクセス</a><a href="index.html#contact">お問い合わせ</a><a target="_blank" rel="noopener" href="https://www.instagram.com/fattoria.comoto">Instagram</a></nav>
+    <nav class="topnav" aria-label="サイト内"><a href="news.html">お知らせ一覧</a><a href="menu.html">メニュー</a><a class="cal" href="calendar.html">営業日カレンダー</a><a href="index.html#about">こもとについて</a><a aria-current="page" href="kodawari.html">こだわり</a><a href="index.html#visit">アクセス</a><a href="index.html#contact">お問い合わせ</a><a target="_blank" rel="noopener" href="https://www.instagram.com/fattoria.comoto">Instagram</a></nav>
   </div>
 </header>
 
-<main>
+<main id="main">
   <div class="wrap title">
     <h1>こもとのこだわり</h1>
     <p>「こもと」は「地元素材のお料理を食べていただきたい」という思いから、平成28年5月にオープンした農家レストランです。自家生産の野菜やお米、目の前の畑で育てられる蕎麦や小麦「ゆきちから」を中心に、素材を活かしたお料理を提供しております。</p>

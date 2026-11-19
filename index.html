@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Fattoria CoMoTo</title>
+<title>ファットリアこもと｜会津坂下町の高寺芯そばと農家レストラン</title>
 <meta name="description" content="会津坂下町のSoba cafe & Farmer's restaurant「ファットリアこもと」。自家栽培と地元素材のイタリアンと高寺芯そば。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -184,47 +184,103 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
 .logo{font-weight:500}
 .title h1{font-family:var(--f-head);font-style:normal;font-weight:700;font-size:clamp(1.8rem,4.2vw,2.6rem);line-height:1.3}
 .month h2,.meta time,.item .yen,.d{font-family:var(--f-head)}
+
+/* ===== デザイン整理（2026-11）：楕円のボタン・色分け・飾りをやめ、文字と写真で見せる ===== */
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:12px;top:8px;z-index:20;background:var(--bg);color:var(--fg);padding:8px 14px;outline:2px solid var(--tomato)}
+/* ヘッダーのメニュー：枠なしの文字メニュー。押しやすい高さ44px */
+.topnav{border:0;border-radius:0;background:none;padding:0;gap:0 2px}
+.topnav a{border-radius:0;padding:0 10px;min-height:44px;display:flex;align-items:center;font-weight:500;color:var(--fg);background:none;box-shadow:none}
+.topnav a:hover,.topnav a.cal:hover{background:none;color:var(--tomato)}
+.topnav a.cal{background:none;color:var(--fg)}
+.topnav a[aria-current="page"]{background:none;color:var(--fg);box-shadow:inset 0 -2px 0 var(--fg)}
+@media (max-width:760px){
+  .topnav{border-radius:0;border-block:1px solid var(--line);margin-inline:-20px;padding-inline:10px}
+  .topnav a{padding-inline:9px}
+}
+/* ボタン・目次：角を小さく、色は墨一色に */
+.btn-menu,.cta a,.mail-btn,.kodawari-link,.back,.back a,.btn-pdf{border-radius:4px!important;min-height:44px;display:inline-flex!important;align-items:center}
+.cta a,.tel-btn{background:var(--bg)!important;color:var(--fg)!important;border:1px solid var(--fg)!important}
+.cta a.go,.mail-btn:not(.tel-btn),.btn-pdf,.kodawari-link{background:var(--fg)!important;color:var(--bg)!important;border:1px solid var(--fg)!important}
+.cats a,.toc a,.filters button{border-radius:4px;min-height:40px;display:inline-flex;align-items:center}
+.names li{border-radius:4px}
+.btn-menu,.cta a,.mail-btn,.kodawari-link,.back a,.btn-pdf{text-decoration:none!important;padding:10px 22px}
+@media (max-width:760px){.topnav{max-width:none}}
+/* ラベル：色分けをやめ、細い枠の文字だけに。期間限定だけ朱色 */
+.tag,.badge,.pop{background:none!important;border:1px solid currentColor!important;color:var(--muted)!important;font-weight:500!important}
+.tag-limited,.badge,.pop{color:var(--tomato)!important}
+
+/* ===== トップページ ===== */
+.hero2{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"photo tate" "text text";gap:28px clamp(20px,3vw,40px);padding-block:clamp(12px,2vw,24px) clamp(40px,6vw,64px)}
+.hero-photo{grid-area:photo;margin:0}
+.hero-photo img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.tate{grid-area:tate;writing-mode:vertical-rl;font-family:var(--f-head);font-weight:500;font-size:clamp(1.25rem,2.6vw,2rem);line-height:1.9;letter-spacing:.18em;margin:0;align-self:start}
+.hero-text{grid-area:text;display:grid;grid-template-columns:minmax(0,auto) minmax(0,34em);gap:12px clamp(24px,4vw,56px);align-items:baseline}
+.hero2 h1{font-family:var(--f-head);font-weight:700;font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:.08em;line-height:1.3;margin:0}
+.hero2 .lead{margin:0;max-width:34em}
+.info{border-block:1px solid var(--line)}
+.info .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 32px;padding-block:18px}
+.info dl{display:flex;flex-wrap:wrap;gap:10px 40px;margin:0}
+.info dt{font-size:.8rem;color:var(--muted)}
+.info dd{margin:0;font-family:var(--f-head);font-weight:700;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.info-link{display:inline-flex;align-items:center;min-height:44px}
+.news-list{max-height:none;overflow:visible}
+.news-list li{padding:10px 0}
+.farm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.farm-grid figure{margin:0}
+.farm-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.farm-grid figcaption,.dish-grid span{font-size:.82rem;color:var(--muted);margin-top:4px;display:block}
+.points{gap:32px 40px}
+.points article{background:none;padding:0}
+.points h3{font-size:1.1rem;margin-bottom:8px}
+.dish-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px 14px}
+.dish-grid a{color:var(--fg);text-decoration:none;display:block}
+.dish-grid a:hover span{color:var(--tomato);text-decoration:underline}
+.dish-grid img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.dish-grid span{color:var(--fg);font-size:.9rem;margin-top:6px}
+.contact-mail{border-top:0;background:var(--tint)}
+.intro figure img,.slides{border-radius:0}
+@media (max-width:760px){
+  .hero2{grid-template-areas:"photo photo" "text tate";grid-template-columns:minmax(0,1fr) auto;gap:20px 16px}
+  .hero-photo{margin-inline:-20px}
+  .hero-photo img{aspect-ratio:4/3}
+  .hero-text{grid-template-columns:minmax(0,1fr)}
+  .tate{font-size:1.15rem}
+  .hero2 h1{font-size:clamp(1.45rem,7vw,1.9rem);letter-spacing:.02em;white-space:nowrap}
+  .info dl{gap:10px 28px}
+  .dish-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#top">本文へ移動</a>
 
 <header>
   <div class="wrap">
     <a class="logo" href="#top">Fattoria CoMoTo</a>
-    <nav class="topnav" aria-label="サイト内"><a href="news.html">お知らせ一覧</a><a href="menu.html">メニュー</a><a class="cal" target="_blank" rel="noopener" href="calendar.html">営業日カレンダー</a><a href="#about">こもとについて</a><a href="kodawari.html">こだわり</a><a href="#visit">アクセス</a><a href="#contact">お問い合わせ</a><a target="_blank" rel="noopener" href="https://www.instagram.com/fattoria.comoto">Instagram</a></nav>
+    <nav class="topnav" aria-label="サイト内"><a href="news.html">お知らせ一覧</a><a href="menu.html">メニュー</a><a class="cal" href="calendar.html">営業日カレンダー</a><a href="#about">こもとについて</a><a href="kodawari.html">こだわり</a><a href="#visit">アクセス</a><a href="#contact">お問い合わせ</a><a target="_blank" rel="noopener" href="https://www.instagram.com/fattoria.comoto">Instagram</a></nav>
   </div>
 </header>
 
 <main id="top">
-  <div class="wrap hero">
-    <div>
-      <h1>Fattoria<br>CoMoTo</h1>
-      <p class="sub">Soba cafe &amp; Farmer's restaurant</p>
-      <p class="lead">会津坂下・坂本の農家レストラン「ファットリアこもと」。<strong>自家栽培の野菜とお米</strong>、店の前の畑の蕎麦と小麦で、高寺芯そばも生パスタもピッツァも。地元の素材でつくる、自給自足のお裾分けです。</p>
-    </div>
-    <div class="slides" aria-roledescription="スライドショー">
-      <figure class="slide on"><img src="images/soba-zaru.jpg" alt="高寺芯そば ざる蕎麦"><figcaption>高寺芯そば ざる蕎麦</figcaption></figure>
-      <figure class="slide"><img src="images/s-soba-olive.jpg" alt="オリーブオイルの冷やがけそば" loading="lazy"><figcaption>オリーブオイルの冷やがけそば</figcaption></figure>
-      <figure class="slide"><img src="images/s-pasta-tomato.jpg" alt="マスカルポーネのトマトパスタ" loading="lazy"><figcaption>マスカルポーネのトマトパスタ</figcaption></figure>
-      <figure class="slide"><img src="images/s-pasta-genovese.jpg" alt="ジェノベーゼ" loading="lazy"><figcaption>ジェノベーゼ</figcaption></figure>
-      <figure class="slide"><img src="images/s-pizza-salad.jpg" alt="イタリアンサラミと生ハムのサラダピッツァ" loading="lazy"><figcaption>サラミと生ハムのサラダピッツァ</figcaption></figure>
-      <figure class="slide"><img src="images/s-katsudon.jpg" alt="やまと豚の焼きソースカツ丼" loading="lazy"><figcaption>やまと豚の焼きソースカツ丼</figcaption></figure>
-      <figure class="slide"><img src="images/s-omurice.jpg" alt="地鶏卵のオムライス" loading="lazy"><figcaption>地鶏卵のオムライス</figcaption></figure>
-      <figure class="slide"><img src="images/s-curry-green.jpg" alt="奥会津グリーンカレー" loading="lazy"><figcaption>奥会津グリーンカレー</figcaption></figure>
-      <figure class="slide"><img src="images/s-sausage.jpg" alt="秋田ウマイケルのソーセージ" loading="lazy"><figcaption>秋田ウマイケルのソーセージ</figcaption></figure>
-      <figure class="slide"><img src="images/s-plate.jpg" alt="ご予約コース料理" loading="lazy"><figcaption>ご予約コース料理</figcaption></figure>
-      <figure class="slide"><img src="images/s-coffee.jpg" alt="自家焙煎コーヒー" loading="lazy"><figcaption>自家焙煎コーヒー</figcaption></figure>
-      <figure class="slide"><img src="images/exterior.jpg" alt="ファットリアこもとの外観" loading="lazy"><figcaption>店舗外観</figcaption></figure>
-      <figure class="slide"><img src="images/terrace.jpg" alt="テラス席" loading="lazy"><figcaption>テラス席</figcaption></figure>
-      <div class="dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="wrap hero2">
+    <figure class="hero-photo"><img src="images/soba-zaru.jpg" alt="高寺芯そばのざる蕎麦。白く透き通った十割蕎麦"></figure>
+    <p class="tate" lang="ja">地元の素材でつくる、<br>自給自足のお裾分け。</p>
+    <div class="hero-text">
+      <h1>ファットリアこもと</h1>
+      <p class="lead">会津坂下・坂本の農家レストラン。自家栽培の野菜とお米、店の前の畑の蕎麦と小麦で、高寺芯そばも生パスタもピッツァもつくっています。</p>
     </div>
   </div>
 
-  <div class="ribbon">
+  <div class="info">
     <div class="wrap">
-      <div><b>11:00–15:00</b><span>ランチ</span></div>
-      <div><b>17:00–20:00</b><span>ディナー</span></div>
-      <div><b>P 25台</b><span>大型バスも駐車できます</span></div>
+      <dl>
+        <div><dt>ランチ</dt><dd>11:00–15:00</dd></div>
+        <div><dt>ディナー</dt><dd>17:00–20:00</dd></div>
+        <div><dt>定休日</dt><dd>月曜・第3火曜</dd></div>
+        <div><dt>駐車場</dt><dd>25台・大型バス可</dd></div>
+      </dl>
+      <a class="info-link" href="calendar.html">営業日カレンダーを見る</a>
     </div>
   </div>
 
@@ -248,18 +304,6 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
           <li><time datetime="2026-10-14">2026.10.14</time><span class="tag tag-limited">新そば</span><a href="news.html#n20261014">新そば提供始まりました。会津で一番早い新そばです</a></li>
           <li><time datetime="2026-10-08">2026.10.08</time><span class="tag tag-event">まちゼミ</span><a href="news.html#n20261008">こもとのまちゼミ「暮らしを彩るクラフト講座」が開催されました</a></li>
           <li><time datetime="2026-10-06">2026.10.06</time><span class="tag tag-info">農園</span><a href="news.html#n20261006">こもとのニンニクを定植しました</a></li>
-          <li><time datetime="2026-10-04">2026.10.04</time><span class="tag tag-limited">季節限定</span><a href="news.html#n20261004">季節限定 茄子の味噌ピザ 絶賛発売中</a></li>
-          <li><time datetime="2026-10-03">2026.10.03</time><span class="tag tag-event">イベント</span><a href="news.html#n20261003">こもとの里山（玄ちゃんの森）で森のコンサートが開かれました</a></li>
-          <li><time datetime="2026-10-03">2026.10.03</time><span class="tag tag-rice">新米</span><a href="news.html#n20261003-2">新米 特別栽培コシヒカリの販売を始めました</a></li>
-          <li><time datetime="2026-09-22">2026.09.22</time><span class="tag tag-info">農園</span><a href="news.html#n20260922">さつまいもを収穫しました。現在キュアリング（熟成）中です。今年も「こもと芋のブリュレ」をお出しします</a></li>
-          <li><time datetime="2026-09-05">2026.09.05</time><span class="tag tag-rice">新米</span><a href="news.html#n20260905">新米「五百川」の販売を始めました</a></li>
-          <li><time datetime="2026-09-05">2026.09.05</time><span class="tag tag-event">イベント</span><a href="news.html#n20260905-2">こもとフェスを開催しました</a></li>
-          <li><time datetime="2026-09-01">2026.09.01</time><span class="tag tag-info">農園</span><a href="news.html#n20260901">こもとのヤギにまた赤ちゃんが生まれました</a></li>
-          <li><time datetime="2026-09-01">2026.09.01</time><span class="tag tag-event">まちゼミ</span><a href="https://www.bange-bonge.jp/matizemi/" target="_blank" rel="noopener">会津坂下町商工会まちゼミで、こもとが主催する「世界を旅するコーヒー紀行」「暮らしを彩るクラフト講座」の募集が始まりました</a></li>
-          <li><time datetime="2026-08-29">2026.08.29</time><span class="tag tag-info">農園</span><a href="news.html#n20260829">令和8年の稲刈りが始まりました</a></li>
-          <li><time datetime="2026-08-01">2026.08.01</time><span class="tag tag-new">新メニュー</span><a href="news.html#n20260801">ラム肉のボロネーゼの提供を始めました</a></li>
-          <li><time datetime="2026-08">2026.08</time><span class="tag tag-new">カフェ</span><a href="news.html#n202608">自家焙煎コーヒーを始めました</a></li>
-          <li><time datetime="2026-07">2026.07</time><span class="tag tag-new">新メニュー</span><a href="news.html#n202607">栗入り馬肉カレーの提供を始めました</a></li>
         </ul>
         <p class="news-more"><a href="news.html">お知らせ一覧（写真つき）を見る</a></p>
         </div>
@@ -274,17 +318,12 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
           <div class="head"><div><h2>地元の素材を、<br>地元のお店で。</h2></div></div>
           <p>「こもと」は「地元素材のお料理を食べていただきたい」という思いから、平成28年5月にオープンした農家レストランです。</p>
           <p>自家生産の野菜やお米、店の前の畑で二毛作する蕎麦と小麦「ゆきちから」を中心に、高寺芯そば、生パスタ、ピッツァ、カレーやソースカツ丼まで、素材を活かしたメニューをそろえています。</p>
-          <p><a class="kodawari-link" href="kodawari.html" style="display:inline-block;padding:9px 22px;border-radius:999px;background:var(--basil);color:var(--bg);text-decoration:none;font-size:.9rem">こもとのこだわりを読む</a></p>
+          <p><a class="kodawari-link" href="kodawari.html">こもとのこだわりを読む</a></p>
         </div>
         <figure>
           <img src="images/terrace.jpg" alt="赤い日よけの下に並ぶテラス席。奥に会津の山並み">
           <figcaption>テラス席。晴れた日は会津の山を眺めながら。</figcaption>
         </figure>
-      </div>
-      <div class="facts">
-        <div><b>1991〜</b><span>農業をはじめた年。お米から野菜、養鶏へ</span></div>
-        <div><b>水田 11ha</b><span>うち4haは紙マルチ栽培。お店のご飯は自家生産米</span></div>
-        <div><b>畑 110a</b><span>有機肥料100％・農薬不使用の野菜畑</span></div>
       </div>
     </div>
   </section>
@@ -292,12 +331,11 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
   <section id="story" style="padding-top:0">
     <div class="wrap">
       <div class="story">
-        <div class="slides story-slides">
-          <figure class="slide on"><img src="images/exterior.jpg" alt="杉板張りの店舗外観とテラス"><figcaption>お店</figcaption></figure>
-          <figure class="slide"><img src="images/farm-vegetable.jpg" alt="店の前の野菜畑" loading="lazy"><figcaption>野菜畑</figcaption></figure>
-          <figure class="slide"><img src="images/farm-soba.jpg" alt="白い花が咲く蕎麦畑" loading="lazy"><figcaption>蕎麦畑</figcaption></figure>
-          <figure class="slide"><img src="images/farm-rice.jpg" alt="実りの秋の田んぼ" loading="lazy"><figcaption>田んぼ</figcaption></figure>
-          <div class="dots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <div class="farm-grid">
+          <figure><img src="images/exterior.jpg" alt="杉板張りの店舗外観とテラス" loading="lazy"><figcaption>お店</figcaption></figure>
+          <figure><img src="images/farm-vegetable.jpg" alt="店の前の野菜畑" loading="lazy"><figcaption>野菜畑</figcaption></figure>
+          <figure><img src="images/farm-soba.jpg" alt="白い花が咲く蕎麦畑" loading="lazy"><figcaption>蕎麦畑</figcaption></figure>
+          <figure><img src="images/farm-rice.jpg" alt="実りの秋の田んぼ" loading="lazy"><figcaption>田んぼ</figcaption></figure>
         </div>
         <div>
           <h2>畑から、テーブルまで。</h2>
@@ -320,12 +358,16 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
   <section id="menu-teaser" class="teaser">
     <div class="wrap">
       <div class="head"><div><h2>高寺芯そばと、人気のトマトパスタ</h2></div><a class="btn-menu" href="menu.html">メニューを見る</a></div>
-      <div class="teaser-grid">
-        <a href="menu.html#soba"><img src="images/soba-zaru.jpg" alt=""><span>高寺芯そば</span></a>
-        <a href="menu.html#pasta"><img src="images/pasta-tomato-veg.jpg" alt=""><span>トマトパスタ</span></a>
-        <a href="menu.html#pizza"><img src="images/pizza-formaggi.jpg" alt=""><span>ピッツァ</span></a>
-        <a href="menu.html#alacarte"><img src="images/pickles.jpg" alt=""><span>一品料理</span></a>
-      </div>
+      <ul class="dish-grid">
+        <li><a href="menu.html#soba"><img src="images/soba-zaru.jpg" alt="" loading="lazy"><span>高寺芯そば ざる蕎麦</span></a></li>
+        <li><a href="menu.html#soba"><img src="images/s-soba-olive.jpg" alt="" loading="lazy"><span>オリーブオイルの冷やがけそば</span></a></li>
+        <li><a href="menu.html#pasta"><img src="images/s-pasta-tomato.jpg" alt="" loading="lazy"><span>マスカルポーネのトマトパスタ</span></a></li>
+        <li><a href="menu.html#pasta"><img src="images/s-pasta-genovese.jpg" alt="" loading="lazy"><span>ジェノベーゼ</span></a></li>
+        <li><a href="menu.html#pizza"><img src="images/s-pizza-salad.jpg" alt="" loading="lazy"><span>サラミと生ハムのサラダピッツァ</span></a></li>
+        <li><a href="menu.html#rice"><img src="images/s-katsudon.jpg" alt="" loading="lazy"><span>やまと豚の焼きソースカツ丼</span></a></li>
+        <li><a href="menu.html#rice"><img src="images/s-omurice.jpg" alt="" loading="lazy"><span>地鶏卵のオムライス</span></a></li>
+        <li><a href="menu.html#cafe"><img src="images/s-coffee.jpg" alt="" loading="lazy"><span>自家焙煎コーヒー</span></a></li>
+      </ul>
     </div>
   </section>
 
@@ -338,7 +380,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
           <dt>電話</dt><dd><a href="tel:0242831101">0242-83-1101</a></dd>
           <dt>メール</dt><dd><a href="mailto:fattoria.comoto@gmail.com">fattoria.comoto@gmail.com</a></dd>
           <dt>営業時間</dt><dd>11:00〜15:00／17:00〜20:00<br><small>ラストオーダー：平日15分前・土日祝30分前</small></dd>
-          <dt>定休日</dt><dd>月曜日・第3火曜日（祝日の場合は翌日）<br><a href="calendar.html" target="_blank" rel="noopener">営業日カレンダーを見る</a></dd>
+          <dt>定休日</dt><dd>月曜日・第3火曜日（祝日の場合は翌日）<br><a href="calendar.html">営業日カレンダーを見る</a></dd>
           <dt>席数</dt><dd>約50席（テーブル9卓42席・カウンター2席・テラス約6席）</dd>
           <dt>駐車場</dt><dd>25台（大型バス駐車可）</dd>
           <dt>お支払い</dt><dd>クレジットカード・電子マネー・QRコード決済など主要なキャッシュレス決済に対応</dd>
@@ -376,24 +418,6 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
 
 <footer><span class="it">Fattoria CoMoTo</span>株式会社ファットリアこもと<br><a class="foot-link" href="mailto:fattoria.comoto@gmail.com">fattoria.comoto@gmail.com</a>　<a class="foot-link" href="https://www.facebook.com/masayasu.igarashi" target="_blank" rel="noopener">こもとの裏方（Facebook）</a></footer>
 
-<script>
-(function(){
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  document.querySelectorAll('.slides').forEach(function(box,n){
-    var slides=box.querySelectorAll('.slide'), dots=box.querySelectorAll('.dots span'), i=0;
-    if(!slides.length) return;
-    dots[0] && dots[0].classList.add('on');
-    if(reduce || slides.length<2) return;
-    setTimeout(function(){
-      setInterval(function(){
-        slides[i].classList.remove('on'); dots[i] && dots[i].classList.remove('on');
-        i=(i+1)%slides.length;
-        slides[i].classList.add('on'); dots[i] && dots[i].classList.add('on');
-      },4500);
-    }, n*1500);
-  });
-})();
-</script>
 
 </body>
 </html>
