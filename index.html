@@ -250,6 +250,48 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
   .info dl{gap:10px 28px}
   .dish-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+/* ===== リッチ版の試作 ===== */
+/* 1. 写真を全幅で */
+.hero2{max-width:none;padding-inline:0;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"photo photo" "text tate";padding-top:0}
+.hero-photo img{aspect-ratio:auto;height:min(78vh,760px)}
+.hero-text,.tate{margin-inline:max(20px,calc((100vw - 1140px)/2))}
+.hero-text{margin-right:0}
+.tate{margin-left:0;font-size:clamp(1.4rem,2.6vw,2.1rem)}
+.band{margin:0}
+.band img{width:100%;height:min(62vh,620px);object-fit:cover;display:block}
+.band figcaption{font-size:.82rem;color:var(--muted);padding-block:8px 0}
+/* 2. 縦書きの見出し（PC） */
+@media (min-width:761px){
+  .intro .head h2,.story h2{writing-mode:vertical-rl;font-size:clamp(1.6rem,2.6vw,2.1rem);letter-spacing:.16em;line-height:1.7;margin:0}
+  .intro>div:first-child{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:40px;align-items:start}
+  .intro>div:first-child .head{grid-row:1/span 9;margin:0}
+  .story>div:last-child{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:40px;align-items:start}
+  .story>div:last-child h2{grid-row:1/span 9}
+}
+.hero-text{grid-template-columns:minmax(0,1fr);align-self:start;max-width:40em;gap:18px}
+.story h2{font-size:clamp(1.4rem,2.2vw,1.8rem)!important}
+.hero-text .info{border:0;border-top:1px solid var(--line);padding-top:14px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.hero-text .info dl{gap:10px 32px}
+/* 写真は端から端まで、文字と縦書きは中央の幅にそろえる */
+.hero2{grid-template-columns:minmax(20px,1fr) minmax(0,760px) auto minmax(20px,1fr);grid-template-areas:none;column-gap:0;row-gap:28px}
+.hero2 .hero-photo{grid-column:1/-1;grid-row:1}
+.hero2 .hero-text{grid-column:2;grid-row:2;margin:0}
+.hero2 .tate{grid-column:3;grid-row:2;margin:0 0 0 clamp(24px,6vw,120px);padding-top:.2em}
+/* 3. 料理写真は大小で */
+.dish-grid .big{grid-column:span 2;grid-row:span 2}
+.dish-grid .big img{aspect-ratio:auto;height:calc(100% - 30px)}
+.dish-grid .big a{height:100%}
+.dish-grid .big span{font-family:var(--f-head);font-weight:700;font-size:1.05rem}
+@media (max-width:760px){
+  .hero2{grid-template-columns:20px minmax(0,1fr) auto 20px;row-gap:20px}
+  .hero2 .tate{margin-left:16px}
+  .hero-photo{margin-inline:0}
+  .hero-photo img{height:62vh}
+  .band img{height:46vh}
+  .dish-grid .big{grid-column:1/-1;grid-row:auto}
+  .dish-grid .big img{height:auto;aspect-ratio:4/3}
+}
 </style>
 </head>
 <body>
@@ -263,24 +305,21 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
 </header>
 
 <main id="top">
-  <div class="wrap hero2">
+  <div class="hero2">
     <figure class="hero-photo"><img src="images/soba-zaru.jpg" alt="高寺芯そばのざる蕎麦。白く透き通った十割蕎麦"></figure>
     <p class="tate" lang="ja">地元の素材でつくる、<br>自給自足のお裾分け。</p>
     <div class="hero-text">
       <h1>ファットリアこもと</h1>
       <p class="lead">会津坂下・坂本の農家レストラン。自家栽培の野菜とお米、店の前の畑の蕎麦と小麦で、高寺芯そばも生パスタもピッツァもつくっています。</p>
-    </div>
-  </div>
-
-  <div class="info">
-    <div class="wrap">
-      <dl>
-        <div><dt>ランチ</dt><dd>11:00–15:00</dd></div>
-        <div><dt>ディナー</dt><dd>17:00–20:00</dd></div>
-        <div><dt>定休日</dt><dd>月曜・第3火曜</dd></div>
-        <div><dt>駐車場</dt><dd>25台・大型バス可</dd></div>
-      </dl>
-      <a class="info-link" href="calendar.html">営業日カレンダーを見る</a>
+      <div class="info">
+        <dl>
+          <div><dt>ランチ</dt><dd>11:00–15:00</dd></div>
+          <div><dt>ディナー</dt><dd>17:00–20:00</dd></div>
+          <div><dt>定休日</dt><dd>月曜・第3火曜</dd></div>
+          <div><dt>駐車場</dt><dd>25台・大型バス可</dd></div>
+        </dl>
+        <a class="info-link" href="calendar.html">営業日カレンダーを見る</a>
+      </div>
     </div>
   </div>
 
@@ -328,14 +367,14 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
     </div>
   </section>
 
+  <figure class="band"><img src="images/farm-soba.jpg" alt="白い花が一面に咲く蕎麦畑" loading="lazy"><figcaption class="wrap">坂本地区の蕎麦畑</figcaption></figure>
+
   <section id="story" style="padding-top:0">
     <div class="wrap">
       <div class="story">
         <div class="farm-grid">
           <figure><img src="images/exterior.jpg" alt="杉板張りの店舗外観とテラス" loading="lazy"><figcaption>お店</figcaption></figure>
           <figure><img src="images/farm-vegetable.jpg" alt="店の前の野菜畑" loading="lazy"><figcaption>野菜畑</figcaption></figure>
-          <figure><img src="images/farm-soba.jpg" alt="白い花が咲く蕎麦畑" loading="lazy"><figcaption>蕎麦畑</figcaption></figure>
-          <figure><img src="images/farm-rice.jpg" alt="実りの秋の田んぼ" loading="lazy"><figcaption>田んぼ</figcaption></figure>
         </div>
         <div>
           <h2>畑から、テーブルまで。</h2>
@@ -359,7 +398,7 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
     <div class="wrap">
       <div class="head"><div><h2>高寺芯そばと、人気のトマトパスタ</h2></div><a class="btn-menu" href="menu.html">メニューを見る</a></div>
       <ul class="dish-grid">
-        <li><a href="menu.html#soba"><img src="images/soba-zaru.jpg" alt="" loading="lazy"><span>高寺芯そば ざる蕎麦</span></a></li>
+        <li class="big"><a href="menu.html#soba"><img src="images/soba-zaru.jpg" alt="" loading="lazy"><span>高寺芯そば ざる蕎麦</span></a></li>
         <li><a href="menu.html#soba"><img src="images/s-soba-olive.jpg" alt="" loading="lazy"><span>オリーブオイルの冷やがけそば</span></a></li>
         <li><a href="menu.html#pasta"><img src="images/s-pasta-tomato.jpg" alt="" loading="lazy"><span>マスカルポーネのトマトパスタ</span></a></li>
         <li><a href="menu.html#pasta"><img src="images/s-pasta-genovese.jpg" alt="" loading="lazy"><span>ジェノベーゼ</span></a></li>
@@ -367,9 +406,12 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
         <li><a href="menu.html#rice"><img src="images/s-katsudon.jpg" alt="" loading="lazy"><span>やまと豚の焼きソースカツ丼</span></a></li>
         <li><a href="menu.html#rice"><img src="images/s-omurice.jpg" alt="" loading="lazy"><span>地鶏卵のオムライス</span></a></li>
         <li><a href="menu.html#cafe"><img src="images/s-coffee.jpg" alt="" loading="lazy"><span>自家焙煎コーヒー</span></a></li>
+        <li><a href="menu.html#rice"><img src="images/s-curry-green.jpg" alt="" loading="lazy"><span>奥会津グリーンカレー</span></a></li>
       </ul>
     </div>
   </section>
+
+  <figure class="band"><img src="images/farm-rice.jpg" alt="実りの秋の田んぼ" loading="lazy"><figcaption class="wrap">こもとの田んぼ</figcaption></figure>
 
   <section id="visit" class="visit">
     <div class="wrap grid">
