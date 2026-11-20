@@ -292,6 +292,14 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
   .dish-grid .big{grid-column:1/-1;grid-row:auto}
   .dish-grid .big img{height:auto;aspect-ratio:4/3}
 }
+
+/* ヒーロー下段：他のセクションと同じ幅にそろえ、縦書きは右端に */
+.hero2{display:block;padding-bottom:clamp(40px,6vw,64px)}
+.hero2 .hero-photo{margin:0 0 28px}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.hero-row .hero-text{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;max-width:36em;margin:0}
+.hero-row .tate{margin:0;padding-top:.3em;font-size:clamp(1.15rem,1.9vw,1.6rem);line-height:1.9;letter-spacing:.14em}
+@media (max-width:760px){.hero2 .hero-photo{margin-bottom:20px}.hero-row{gap:12px}.hero-row .tate{font-size:1.05rem}}
 </style>
 </head>
 <body>
@@ -307,19 +315,21 @@ h1,h2,h3{font-family:var(--f-head);letter-spacing:.04em}
 <main id="top">
   <div class="hero2">
     <figure class="hero-photo"><img src="images/soba-zaru.jpg" alt="高寺芯そばのざる蕎麦。白く透き通った十割蕎麦"></figure>
-    <p class="tate" lang="ja">地元の素材でつくる、<br>自給自足のお裾分け。</p>
-    <div class="hero-text">
-      <h1>ファットリアこもと</h1>
-      <p class="lead">会津坂下・坂本の農家レストラン。自家栽培の野菜とお米、店の前の畑の蕎麦と小麦で、高寺芯そばも生パスタもピッツァもつくっています。</p>
-      <div class="info">
-        <dl>
-          <div><dt>ランチ</dt><dd>11:00–15:00</dd></div>
-          <div><dt>ディナー</dt><dd>17:00–20:00</dd></div>
-          <div><dt>定休日</dt><dd>月曜・第3火曜</dd></div>
-          <div><dt>駐車場</dt><dd>25台・大型バス可</dd></div>
-        </dl>
-        <a class="info-link" href="calendar.html">営業日カレンダーを見る</a>
+    <div class="wrap hero-row">
+      <div class="hero-text">
+        <h1>ファットリアこもと</h1>
+        <p class="lead">会津坂下・坂本の農家レストラン。自家栽培の野菜とお米、店の前の畑の蕎麦と小麦で、高寺芯そばも生パスタもピッツァもつくっています。</p>
+        <div class="info">
+          <dl>
+            <div><dt>ランチ</dt><dd>11:00–15:00</dd></div>
+            <div><dt>ディナー</dt><dd>17:00–20:00</dd></div>
+            <div><dt>定休日</dt><dd>月曜・第3火曜</dd></div>
+            <div><dt>駐車場</dt><dd>25台・大型バス可</dd></div>
+          </dl>
+          <a class="info-link" href="calendar.html">営業日カレンダーを見る</a>
+        </div>
       </div>
+      <p class="tate" lang="ja">地元の素材でつくる、<br>自給自足のお裾分け。</p>
     </div>
   </div>
 
